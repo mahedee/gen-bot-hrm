@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Connector;
+using System;
 
 namespace HRMBot
 {
@@ -18,6 +19,13 @@ namespace HRMBot
         {
             if (activity.Type == ActivityTypes.Message)
             {
+                // send typing indicator
+                ConnectorClient connector = new ConnectorClient(new Uri(activity.ServiceUrl));
+                Activity reply = activity.CreateReply();
+                reply.Type = ActivityTypes.Typing;
+                // reply.Text = null;
+                await connector.Conversations.ReplyToActivityAsync(reply);
+
                 await Conversation.SendAsync(activity, () => new Dialogs.RootLuisDialog());
                 //await Conversation.SendAsync(activity, () => new Dialogs.RootLuisDialog());
             }
