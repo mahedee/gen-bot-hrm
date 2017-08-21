@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace HRMBot.Dialogs
 {
-    [LuisModel("6f13a4ce-dabe-485a-bb3f-9aba3156ea95", "5ea418ae538a402a9b99a936389fd0e7", domain: "localhost:5000", staging: true)]
+    [LuisModel("6f13a4ce-dabe-485a-bb3f-9aba3156ea95", "5ea418ae538a402a9b99a936389fd0e7", domain: domain: "westus.api.cognitive.microsoft.com", staging: true)]
     [Serializable]
     public class RootLuisDialog : LuisDialog<object>
     {
