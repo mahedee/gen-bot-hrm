@@ -26,7 +26,9 @@ namespace HRMBot
                 // reply.Text = null;
                 await connector.Conversations.ReplyToActivityAsync(reply);
 
-                await Conversation.SendAsync(activity, () => new Dialogs.RootLuisDialog());
+                var userData = activity.From.Name;
+
+                await Conversation.SendAsync(activity, () => new Dialogs.RootLuisDialog(userData));
                 //await Conversation.SendAsync(activity, () => new Dialogs.RootLuisDialog());
             }
             else
