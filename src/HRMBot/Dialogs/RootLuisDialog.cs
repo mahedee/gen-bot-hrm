@@ -7,6 +7,7 @@ using Microsoft.Bot.Builder.Luis.Models;
 using Microsoft.Bot.Builder.Dialogs;
 using System.Threading.Tasks;
 using Microsoft.Bot.Connector;
+using HRMBot.Extensions;
 
 namespace HRMBot.Dialogs
 {
@@ -27,14 +28,7 @@ namespace HRMBot.Dialogs
             //(result.Entities).Items[0]).Resolution).Items[0]).Value
             string message = $"You are asking for AvailableLeave. Processing Entity: ";
 
-
-            if (result.TryFindEntity("LeaveType", out EntityRecommendation leaveEntityRecommendation))
-            {
-                var msg = leaveEntityRecommendation.Resolution.FirstOrDefault().Value as Newtonsoft.Json.Linq.JArray;
-                message += msg.First.ToString();
-
-
-            }
+            message += result.GetResolvedListEntity("LeaveType");
 
             await context.PostAsync(message);
             context.Wait(this.MessageReceived);
@@ -54,18 +48,9 @@ namespace HRMBot.Dialogs
         [LuisIntent("AvailedLeave")]
         public async Task AvailedLeave(IDialogContext context, LuisResult result)
         {
-            string message = $"You are asking for AvailedLeave. Processing Entity: ";
-            EntityRecommendation leaveEntityRecommendation;
+            string message = $"You are asking for AvailedLeave. Processing Entity: " + result.GetResolvedListEntity("LeaveType");
+           
 
-
-
-            if (result.TryFindEntity("LeaveType", out leaveEntityRecommendation))
-            {
-                var msg = leaveEntityRecommendation.Resolution.FirstOrDefault().Value as Newtonsoft.Json.Linq.JArray;
-                message += msg.First.ToString();
-
-
-            }
 
             await context.PostAsync(message);
             context.Wait(this.MessageReceived);
@@ -76,17 +61,7 @@ namespace HRMBot.Dialogs
         public async Task EntitledLeave(IDialogContext context, LuisResult result)
         {
             string message = $"You are asking for EntitledLeave. Processing Entity: ";
-            EntityRecommendation leaveEntityRecommendation;
-
-
-
-            if (result.TryFindEntity("LeaveType", out leaveEntityRecommendation))
-            {
-                var msg = leaveEntityRecommendation.Resolution.FirstOrDefault().Value as Newtonsoft.Json.Linq.JArray;
-                message += msg.First.ToString();
-
-
-            }
+            message += result.GetResolvedListEntity("LeaveType");
 
             await context.PostAsync(message);
             context.Wait(this.MessageReceived);
