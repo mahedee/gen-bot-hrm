@@ -26,9 +26,28 @@ namespace HRMBot.Dialogs
         public async Task AvailableLeave(IDialogContext context, LuisResult result)
         {
             //(result.Entities).Items[0]).Resolution).Items[0]).Value
-            string message = $"You are asking for AvailableLeave. Processing Entity: ";
+            string message = "You have {0} days of {1} available.";
 
-            message += result.GetResolvedListEntity("LeaveType");
+            switch(result.GetResolvedListEntity("LeaveType"))
+            {
+                case "SickLeave":
+                    message = String.Format(message, 13, "sick leaves");
+                    break;
+
+                case "AnnualLeave":
+                    message = String.Format(message, 37, "annual leaves");
+                    break;
+
+                case "CasualLeave":
+                    message = String.Format(message, 9, "casual leave");
+                    break;
+
+                default:
+                    message = String.Format(message, 59, "total leaves");
+                    break;
+            }
+
+            // message += result.GetResolvedListEntity("LeaveType");
 
             await context.PostAsync(message);
             context.Wait(this.MessageReceived);
@@ -40,7 +59,7 @@ namespace HRMBot.Dialogs
         [LuisIntent("None")]
         public async Task None(IDialogContext context, LuisResult result)
         {
-            string message = $"I do not understand {result.Query}. I am learning new things everyday. Try again tomorrow? ";
+            string message = $"Sorry, I don’t have answer of this question. I am an artificial intelligence system. I am still learning.";
             await context.PostAsync(message);
             context.Wait(this.MessageReceived);
         }
@@ -48,7 +67,30 @@ namespace HRMBot.Dialogs
         [LuisIntent("AvailedLeave")]
         public async Task AvailedLeave(IDialogContext context, LuisResult result)
         {
-            string message = $"You are asking for AvailedLeave. Processing Entity: " + result.GetResolvedListEntity("LeaveType");
+            string message = "You have spent {0} days of {1} so far.";
+
+            switch(result.GetResolvedListEntity("SickLeave"))
+            {
+                case "SickLeave":
+                    message = String.Format(message, 8, "sick leaves");
+                    break;
+
+                case "AnnualLeave":
+                    message = String.Format(message, 15, "annual leaves");
+                    break;
+
+                case "CasualLeave":
+                    message = String.Format(message, 2, "casual leaves");
+                    break;
+
+                case "LeaveWithoutPay":
+                    message = String.Format(message, 1, "leave without pay");
+                    break;
+
+                default:
+                    message = String.Format(message, 26, "total leaves");
+                    break;
+            }
            
 
 
@@ -60,8 +102,26 @@ namespace HRMBot.Dialogs
         [LuisIntent("EntitledLeave")]
         public async Task EntitledLeave(IDialogContext context, LuisResult result)
         {
-            string message = $"You are asking for EntitledLeave. Processing Entity: ";
-            message += result.GetResolvedListEntity("LeaveType");
+            string message = "You are entitled to have {0} days of {1} per year.";
+
+            switch (result.GetResolvedListEntity("SickLeave"))
+            {
+                case "SickLeave":
+                    message = String.Format(message, 14, "sick leaves");
+                    break;
+
+                case "AnnualLeave":
+                    message = String.Format(message, 20, "annual leaves");
+                    break;
+
+                case "CasualLeave":
+                    message = String.Format(message, 10, "casual leaves");
+                    break;
+
+                default:
+                    message = String.Format(message, 44, "total leaves");
+                    break;
+            }
 
             await context.PostAsync(message);
             context.Wait(this.MessageReceived);
