@@ -106,6 +106,8 @@
   <ItemGroup>
     <Content Include="default.htm" />
     <Content Include="Global.asax" />
+    <Content Include="Readme\Readme.txt" />
+    <Content Include="Readme\Todo.txt" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
