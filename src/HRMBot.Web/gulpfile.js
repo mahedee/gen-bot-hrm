@@ -30,11 +30,11 @@ gulp.task('reload', function() {
 });
 
 gulp.task('buildAndReload', ['build'], function(){
-    return browserSync.reload();
+    browserSync.reload();
 });
 
 gulp.task('build', function() {
-    return gulp.src("..\HRMBot.sln")
+    return gulp.src("./../HRMBot.sln")
         .pipe(plumber())
         .pipe(msbuild({
             toolsVersion: 'auto',
