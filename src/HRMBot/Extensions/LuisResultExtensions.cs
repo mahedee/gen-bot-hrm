@@ -11,7 +11,9 @@ namespace HRMBot.Extensions
     {
         public static String GetResolvedListEntity(this LuisResult result, String nameOfListEntity)
         {
-            if (result.TryFindEntity("LeaveType", out EntityRecommendation leaveEntityRecommendation))
+            EntityRecommendation leaveEntityRecommendation;
+
+            if (result.TryFindEntity("LeaveType", out leaveEntityRecommendation))
             {
                 var msg = leaveEntityRecommendation.Resolution.FirstOrDefault().Value as Newtonsoft.Json.Linq.JArray;
                 return msg.First.ToString();

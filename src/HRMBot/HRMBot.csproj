@@ -117,6 +117,7 @@
     <Compile Include="Controllers\MessagesController.cs" />
     <Compile Include="Dialogs\FunDialog.cs" />
     <Compile Include="Dialogs\GreetingDialog.cs" />
+    <Compile Include="Dialogs\JoingDateDialog.cs" />
     <Compile Include="Dialogs\NegativeRateDialog.cs" />
     <Compile Include="Dialogs\PositiveRating.cs" />
     <Compile Include="Dialogs\RootLuisDialog.cs" />
