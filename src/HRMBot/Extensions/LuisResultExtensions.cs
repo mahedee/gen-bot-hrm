@@ -21,5 +21,18 @@ namespace HRMBot.Extensions
 
             return null;
         }
+
+        public static String GetResolvedEntity(this LuisResult result, String nameOfEntity)
+        {
+            EntityRecommendation leaveEntityRecommendation;
+
+            if (result.TryFindEntity(nameOfEntity, out leaveEntityRecommendation))
+            {
+                var msg = leaveEntityRecommendation.Entity;
+                return msg;
+            }
+
+            return null;
+        }
     }
 }
