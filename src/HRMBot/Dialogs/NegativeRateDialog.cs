@@ -23,6 +23,7 @@ namespace HRMBot.Dialogs
             };
 
             string message = messagePoll.OrderBy(s => Guid.NewGuid()).First();
+            message += " " + StaticMessage.AboutDemo;
             await context.PostAsync(message);
             context.Wait(this.MessageReceived);
         }

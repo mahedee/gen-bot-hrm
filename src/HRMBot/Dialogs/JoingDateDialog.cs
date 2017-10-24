@@ -21,7 +21,7 @@ namespace HRMBot.Dialogs
             };
 
             string message = messagePoll.OrderBy(s => Guid.NewGuid()).First();
-            message = String.Format(message, "2nd August, 2012");
+            message = String.Format(message, "2nd August, 2009");
             await context.PostAsync(message);
             context.Wait(this.MessageReceived);
         }

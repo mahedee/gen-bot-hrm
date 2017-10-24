@@ -36,7 +36,7 @@ namespace HRMBot.Dialogs
             else
             {
                 string message = "Sorry I don't have any information about the person right now.";
-                string funadd = " Or my developers only care about themselves :p. Please don't tell them about it ;)";
+                string funadd = " Or my developers only care about themselves :p. Please don't tell them about it ;) ";
 
                 Random random = new Random();
                 if (random.Next(1, 6) == 6)
@@ -44,6 +44,7 @@ namespace HRMBot.Dialogs
                     message += funadd;
                 }
 
+                message += StaticMessage.AboutDemo;
                 await context.PostAsync(message);
                 context.Wait(this.MessageReceived);
             }

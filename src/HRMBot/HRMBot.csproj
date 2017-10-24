@@ -122,6 +122,7 @@
     <Compile Include="Dialogs\NegativeRateDialog.cs" />
     <Compile Include="Dialogs\PositiveRating.cs" />
     <Compile Include="Dialogs\RootLuisDialog.cs" />
+    <Compile Include="Dialogs\StaticMessage.cs" />
     <Compile Include="Dialogs\WhatsUp.cs" />
     <Compile Include="Extensions\LuisResultExtensions.cs" />
     <Compile Include="Global.asax.cs">

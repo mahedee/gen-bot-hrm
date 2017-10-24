@@ -59,7 +59,10 @@ namespace HRMBot.Dialogs
         [LuisIntent("None")]
         public async Task None(IDialogContext context, LuisResult result)
         {
-            string message = $"Sorry, I don’t have answer of this question. I am an artificial intelligence system. I am still learning.";
+            string message = $"Sorry, I don’t have answer of this question. " +
+                $"I am an artificial intelligence system. " +
+                $"I am still learning. ";
+            message += StaticMessage.AboutDemo;
             await context.PostAsync(message);
             context.Wait(this.MessageReceived);
         }
