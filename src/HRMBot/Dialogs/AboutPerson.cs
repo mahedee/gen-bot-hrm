@@ -24,6 +24,7 @@ namespace HRMBot.Dialogs
             if (name.Contains("mahedee") || name.Contains("mahadee") || name.Contains("mehede") || name.Contains("mehede"))
             {
                 string message = "Mahedee Hasan is a Senior Software Architect of Leadsoft Bangladesh Limited";
+                message += "\n Mobile: +8801787139383 \nfacebook: https://www.facebook.com/mahedee19";
                 await context.PostAsync(message);
                 context.Wait(this.MessageReceived);
             }
