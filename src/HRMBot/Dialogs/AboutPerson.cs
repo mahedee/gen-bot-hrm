@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
+using HRMBot.Repository;
 
 namespace HRMBot.Dialogs
 {
@@ -18,37 +19,15 @@ namespace HRMBot.Dialogs
 
             var name = result.GetResolvedEntity("Person");
             name = name == null ? "" : name.ToLower();
-            //if(name != null)
-            //{
-
-            if (name.Contains("mahedee") || name.Contains("mahadee") || name.Contains("mehede") || name.Contains("mehede"))
+            string message;
+            using(var personRepository = new PersonRepository())
             {
-                string message = "Mahedee Hasan is a Senior Software Architect of Leadsoft Bangladesh Limited";
-                message += "\n Mobile: +8801787139383 \nfacebook: https://www.facebook.com/mahedee19";
-                await context.PostAsync(message);
-                context.Wait(this.MessageReceived);
+                message = personRepository.GetPersonInformation(name);
             }
-            else if (name.Contains("ratan") || name.Contains("roton"))
-            {
-                string message = "Ratan Sunder Parai is a Software Engineer at Leads Corpooration Ltd. You can contact him via +8801771998817";
-                await context.PostAsync(message);
-                context.Wait(this.MessageReceived);
-            }
-            else
-            {
-                string message = "Sorry I don't have any information about the person right now.";
-                string funadd = " Or my developers only care about themselves :p. Please don't tell them about it ;) ";
-
-                Random random = new Random();
-                if (random.Next(1, 6) == 6)
-                {
-                    message += funadd;
-                }
-
-                message += StaticMessage.AboutDemo;
-                await context.PostAsync(message);
-                context.Wait(this.MessageReceived);
-            }
+            
+            await context.PostAsync(message);
+            context.Wait(this.MessageReceived);
+            
 
         }
 
