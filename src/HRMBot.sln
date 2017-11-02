@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.10
+VisualStudioVersion = 15.0.27004.2006
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HRMBot", "HRMBot\HRMBot.csproj", "{80B4DD7F-FD9C-4A2B-B8E7-4F4B08AE99DF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HRMBot.Storage", "HRMBot.Storage\HRMBot.Storage.csproj", "{7411A0B6-1A66-429F-BECF-2B8FD1CA9A38}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HRMBot.Repository", "HRMBot.Repository\HRMBot.Repository.csproj", "{E86D8F48-5FD5-4883-B0D5-B95E63F8023A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{80B4DD7F-FD9C-4A2B-B8E7-4F4B08AE99DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{80B4DD7F-FD9C-4A2B-B8E7-4F4B08AE99DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{80B4DD7F-FD9C-4A2B-B8E7-4F4B08AE99DF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7411A0B6-1A66-429F-BECF-2B8FD1CA9A38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7411A0B6-1A66-429F-BECF-2B8FD1CA9A38}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7411A0B6-1A66-429F-BECF-2B8FD1CA9A38}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7411A0B6-1A66-429F-BECF-2B8FD1CA9A38}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E86D8F48-5FD5-4883-B0D5-B95E63F8023A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E86D8F48-5FD5-4883-B0D5-B95E63F8023A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E86D8F48-5FD5-4883-B0D5-B95E63F8023A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E86D8F48-5FD5-4883-B0D5-B95E63F8023A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
