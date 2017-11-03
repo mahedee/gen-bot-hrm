@@ -16,23 +16,18 @@ namespace HRMBot.Dialogs
         [LuisIntent("RegisterUser")]
         public async Task RegisterUser(IDialogContext context, LuisResult result)
         {
-            var previousIntent = context.PrivateConversationData.GetValueOrDefault<string>("PreviousIntent");
-
-            if (previousIntent == null)
-            {
-                context.PrivateConversationData.SetValue("PreviousIntent", "RegisterUser");
-
-            }
+            //await context.PostAsync("Hello");
+            //context.Wait(this.MessageReceived);
 
             context.Call(new MobileNumberDialog(), PhoneNumberDialogResumeAfter);
 
-            //var activity = context.Activity.;
-            const string message = "To verify please send your mobile number in 01XXXXXXXXX format. example:- 01771998817";
-            await context.PostAsync(message);
+            ////var activity = context.Activity.;
+            //const string message = "To verify please send your mobile number in 01XXXXXXXXX format. example:- 01771998817";
+            //await context.PostAsync(message);
 
-            // start new dialog to get the mobile number
+            //// start new dialog to get the mobile number
 
-            context.Wait(this.MessageReceived);
+            //context.Wait(this.MessageReceived);
 
 
         }
@@ -42,6 +37,7 @@ namespace HRMBot.Dialogs
             try
             {
                 var mobileNumber = await result;
+                await context.PostAsync($"Your mobile numer is {mobileNumber}");
 
                 // send varification message
             }

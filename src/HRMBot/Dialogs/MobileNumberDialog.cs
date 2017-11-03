@@ -8,6 +8,7 @@ using Microsoft.Bot.Connector;
 
 namespace HRMBot.Dialogs
 {
+    [Serializable]
     public class MobileNumberDialog : IDialog<int>
     {
         private int _attempts = 3;
@@ -25,7 +26,7 @@ namespace HRMBot.Dialogs
 
             int mobileNumber;
 
-            if (Int32.TryParse(message.Text, out mobileNumber) && (mobileNumber == 10))
+            if (Int32.TryParse(message.Text, out mobileNumber) && (mobileNumber.ToString().Length == 10))
             {
                 context.Done(mobileNumber);
             }
