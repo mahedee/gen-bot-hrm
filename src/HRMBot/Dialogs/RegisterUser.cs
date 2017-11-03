@@ -37,17 +37,17 @@ namespace HRMBot.Dialogs
             try
             {
                 var mobileNumber = await result;
-                await context.PostAsync($"Your mobile numer is {mobileNumber}");
+                await context.PostAsync($"Your mobile number is {mobileNumber}");
 
                 // send varification message
             }
             catch (TooManyAttemptsException)
             {
-                await context.PostAsync("I'm sorry, I'm having issues understanding you.");
+                await context.PostAsync("I'm sorry, I'm having issues understanding you. Try again later.");
             }
             catch (OperationCanceledException)
             {
-
+                
             }
             finally
             {
