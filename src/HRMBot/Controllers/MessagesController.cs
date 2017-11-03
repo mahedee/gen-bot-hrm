@@ -19,19 +19,21 @@ namespace HRMBot
         {
             if (activity.Type == ActivityTypes.Message)
             {
+                ConnectorClient connector = new ConnectorClient(new Uri(activity.ServiceUrl));
+
                 // If user send any images then do not replay antyhing. Just skip it.
                 if (activity.Attachments.Count > 0)
                 {
+                    // TODO: Send read receipt if possible
 
                 }
                 else
                 {
                     // send typing indicator
-                    ConnectorClient connector = new ConnectorClient(new Uri(activity.ServiceUrl));
-                    Activity reply = activity.CreateReply();
-                    reply.Type = ActivityTypes.Typing;
+                    Activity typeing = activity.CreateReply();
+                    typeing.Type = ActivityTypes.Typing;
                     // reply.Text = null;
-                    await connector.Conversations.ReplyToActivityAsync(reply);
+                    await connector.Conversations.ReplyToActivityAsync(typeing);
 
                     var userData = activity.From.Name;
 
