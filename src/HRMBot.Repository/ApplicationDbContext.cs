@@ -8,8 +8,13 @@ using HRMBot.Repository.Models;
 
 namespace HRMBot.Repository
 {
-    class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : DbContext
     {
+        public ApplicationDbContext() : base("Server=(localdb)\\Test;Integrated Security=true;AttachDbFileName= myDbFile;")
+        {
+            
+        }
+
         public DbSet<User> Users { get; set; }
     }
 }

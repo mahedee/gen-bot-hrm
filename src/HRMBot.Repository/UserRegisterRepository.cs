@@ -4,7 +4,7 @@ using HRMBot.Repository.Models;
 
 namespace HRMBot.Repository
 {
-    class UserRegisterRepository : IUserRegisterRepository
+    public class UserRegisterRepository : IUserRegisterRepository
     {
 
         public async Task<string> GenerateOtpCodeAsync(string id, string mobileNumber)

@@ -18,6 +18,7 @@ namespace HRMBot.Dialogs
         {
             //await context.PostAsync("Hello");
             //context.Wait(this.MessageReceived);
+            
 
             context.Call(new MobileNumberDialog(), PhoneNumberDialogResumeAfter);
 
@@ -39,7 +40,11 @@ namespace HRMBot.Dialogs
                 var mobileNumber = await result;
                 await context.PostAsync($"Your mobile number is {mobileNumber}");
 
+                // generate otp and sent it to mobile
+                var repo = new UserRegisterRepository();
+                var otp = await repo.GenerateOtpCodeAsync(context.Activity.From.Id, mobileNumber.ToString("D11"));
                 // send varification message
+                await context.PostAsync($"Your generated otp code is {otp}");
             }
             catch (TooManyAttemptsException)
             {
