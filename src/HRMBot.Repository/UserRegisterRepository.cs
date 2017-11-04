@@ -47,7 +47,7 @@ namespace HRMBot.Repository
             {
                 var user = await db.Users.FindAsync(id);
                 // check if otp matches
-                if (user?.OneTimePassword != null && user.OneTimePassword.Equals(otp))
+                if (user?.OneTimePassword != null && user.OneTimePassword.Equals(otp.Trim()))
                 {
                     user.MobileNumber = user.TemporaryMobileNumber;
                     await db.SaveChangesAsync();

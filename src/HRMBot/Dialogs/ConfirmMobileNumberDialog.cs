@@ -16,7 +16,7 @@ namespace HRMBot.Dialogs
 
         public async Task StartAsync(IDialogContext context)
         {
-            await context.PostAsync("We have send you a code in your number. Please send us the code");
+            await context.PostAsync("I have send you a code in your number. Please send me the code");
 
             context.Wait(this.MessageReceivedAsync);
         }
