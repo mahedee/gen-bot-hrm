@@ -52,7 +52,11 @@ namespace HRMBot.Dialogs
             }
             catch (OperationCanceledException)
             {
-                
+
+            }
+            catch (Exception e)
+            {
+                await context.PostAsync(e.Message);
             }
             finally
             {
