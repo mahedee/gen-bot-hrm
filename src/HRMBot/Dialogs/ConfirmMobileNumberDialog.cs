@@ -41,7 +41,7 @@ namespace HRMBot.Dialogs
                 }
                 if (_attempts > 0)
                 {
-                    await context.PostAsync("Sorry we can not verify your OTP code. What is the OTP code you received in SMS?");
+                    await context.PostAsync("Sorry I can not verify your OTP code. What is the OTP code you received in SMS?");
 
                     context.Wait(this.MessageReceivedAsync);
                 }
