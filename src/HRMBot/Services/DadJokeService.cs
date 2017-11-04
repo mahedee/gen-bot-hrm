@@ -10,11 +10,11 @@ using System.Net.Http.Headers;
 
 namespace HRMBot.Services
 {
-    public class DadJokeService
+    public static class DadJokeService
     {
         public static async Task<string> GetJoke()
         {
-            string apiUrl = "https://icanhazdadjoke.com/";
+            const string apiUrl = "https://icanhazdadjoke.com/";
 
             using (var client = new HttpClient())
             {

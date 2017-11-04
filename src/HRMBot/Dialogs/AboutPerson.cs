@@ -18,7 +18,7 @@ namespace HRMBot.Dialogs
         {
 
             var name = result.GetResolvedEntity("Person");
-            name = name == null ? "" : name.ToLower();
+            name = name?.ToLower() ?? "";
             string message;
             using(var personRepository = new PersonRepository())
             {
