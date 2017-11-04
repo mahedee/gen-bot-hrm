@@ -41,7 +41,7 @@ namespace HRMBot.Dialogs
             try
             {
                 var mobileNumber = await result;
-                await context.PostAsync($"Your mobile number is {mobileNumber}");
+                // await context.PostAsync($"Your mobile number is {mobileNumber}");
 
                 // generate otp and sent it to mobile
                 var repo = new UserRegisterRepository();
