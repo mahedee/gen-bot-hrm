@@ -124,6 +124,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\MessagesController.cs" />
     <Compile Include="Dialogs\AboutPerson.cs" />
+    <Compile Include="Dialogs\ConfirmMobileNumberDialog.cs" />
     <Compile Include="Dialogs\FunDialog.cs" />
     <Compile Include="Dialogs\GreetingDialog.cs" />
     <Compile Include="Dialogs\JoingDateDialog.cs" />
@@ -141,6 +142,8 @@
     <Compile Include="Models\DadJokes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\DadJokeService.cs" />
+    <Compile Include="Services\IMessageProvider.cs" />
+    <Compile Include="Services\Sms.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

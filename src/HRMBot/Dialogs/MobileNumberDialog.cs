@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Connector;
 
@@ -17,23 +14,21 @@ namespace HRMBot.Dialogs
         {
             await context.PostAsync("To verify please send your mobile number in 01XXXXXXXXX format. example:- 01771998817");
 
-            context.Wait(this.MessageReceivedAsync);
+            context.Wait(MessageReceivedAsync);
         }
 
         private async Task MessageReceivedAsync(IDialogContext context, IAwaitable<IMessageActivity> result)
         {
             var message = await result;
 
-            int mobileNumber;
-
-            if (Int32.TryParse(message.Text, out mobileNumber) && (mobileNumber.ToString().Length == 10))
+            if (int.TryParse(message.Text, out var mobileNumber) && (mobileNumber.ToString().Length == 10))
             {
                 context.Done(mobileNumber);
             }
             else
             {
                 --_attempts;
-                if (_attempts > 0 && message.Text.Equals("cancel"))
+                if (message.Text.ToLower().Equals("cancel") || message.Text.ToLower().Equals("exit"))
                 {
                     context.Fail(new OperationCanceledException(""));   
                 }
@@ -41,7 +36,7 @@ namespace HRMBot.Dialogs
                 {
                     await context.PostAsync("I'm sorry, I don't understand your reply. What is your Mobile number (e.g. '01771998817')?");
 
-                    context.Wait(this.MessageReceivedAsync);
+                    context.Wait(MessageReceivedAsync);
                 }
                 else
                 {

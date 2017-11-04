@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using HRMBot.Repository;
+using HRMBot.Services;
 
 namespace HRMBot.Dialogs
 {
@@ -17,18 +18,20 @@ namespace HRMBot.Dialogs
         public async Task RegisterUser(IDialogContext context, LuisResult result)
         {
             //await context.PostAsync("Hello");
-            //context.Wait(this.MessageReceived);
-            
+            //context.Wait(this.MessageReceived
 
-            context.Call(new MobileNumberDialog(), PhoneNumberDialogResumeAfter);
+            var repo = new UserRegisterRepository();
+            var registerdMobile = await repo.isAlreadyVerifiedAsync(context.Activity.From.Id);
 
-            ////var activity = context.Activity.;
-            //const string message = "To verify please send your mobile number in 01XXXXXXXXX format. example:- 01771998817";
-            //await context.PostAsync(message);
-
-            //// start new dialog to get the mobile number
-
-            //context.Wait(this.MessageReceived);
+            if (registerdMobile != null)
+            {
+                await context.PostAsync($"You have already verified your mobile number {registerdMobile}");
+                context.Wait(this.MessageReceived);
+            }
+            else
+            {
+                context.Call(new MobileNumberDialog(), PhoneNumberDialogResumeAfter);
+            }
 
 
         }
@@ -42,9 +45,23 @@ namespace HRMBot.Dialogs
 
                 // generate otp and sent it to mobile
                 var repo = new UserRegisterRepository();
-                var otp = await repo.GenerateOtpCodeAsync(context.Activity.From.Id, mobileNumber.ToString("D11"));
+                var otp = await repo.GenerateOtpCodeAsync(context.Activity.From.Id, mobileNumber.ToString("D11"), context.Activity.From.Name);
                 // send varification message
-                await context.PostAsync($"Your generated otp code is {otp}");
+                // await context.PostAsync($"Your generated otp code is {otp}");
+                string message = $"Your verification code for the HRMBot is {otp}";
+                IMessageProvider provider = new Sms();
+                var success = await provider.SendAsync(mobileNumber.ToString("D11"), message);
+
+                if (!success)
+                {
+                    await context.PostAsync("Sorry we are having trouble sending OTP. Please try again later");
+                    context.Wait(MessageReceived);
+                }
+                else
+                {
+                    // start varify dialog
+                    context.Call(new ConfirmMobileNumberDialog(), ConfirmMobileNumberResumeAfter);
+                }
             }
             catch (TooManyAttemptsException)
             {
@@ -58,11 +75,41 @@ namespace HRMBot.Dialogs
             {
                 await context.PostAsync(e.Message);
             }
+            
+        }
+
+        private async Task ConfirmMobileNumberResumeAfter(IDialogContext context, IAwaitable<bool> result)
+        {
+            try
+            {
+                var success = await result;
+                if (success)
+                {
+                    await context.PostAsync("You have successfully verified your mobile number with this account");
+                }
+                else
+                {
+                    await context.PostAsync("I'm sorry, I can not confirm your mobile number now. Try again later?");
+                }
+
+            }
+            catch (TooManyAttemptsException)
+            {
+                await context.PostAsync("I'm sorry, I can not confirm your mobile number now. Try again later.");
+            }
+            catch (OperationCanceledException)
+            {
+
+            }
+            catch (Exception e)
+            {
+                await context.PostAsync(e.Message);
+            }
             finally
             {
                 context.Wait(this.MessageReceived);
             }
+            
         }
-
     }
 }

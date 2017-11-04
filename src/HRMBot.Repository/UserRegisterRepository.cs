@@ -7,7 +7,7 @@ namespace HRMBot.Repository
     public class UserRegisterRepository : IUserRegisterRepository
     {
 
-        public async Task<string> GenerateOtpCodeAsync(string id, string mobileNumber)
+        public async Task<string> GenerateOtpCodeAsync(string id, string mobileNumber, string name)
         {
 
             var generator = new Random();
@@ -23,7 +23,8 @@ namespace HRMBot.Repository
                     {
                         UserId = id,
                         OneTimePassword = otp,
-                        TemporaryMobileNumber = mobileNumber
+                        TemporaryMobileNumber = mobileNumber,
+                        Name = name
                     };
 
                     db.Users.Add(user);
@@ -55,6 +56,15 @@ namespace HRMBot.Repository
             }
 
             return success;
+        }
+
+        public async Task<string> isAlreadyVerifiedAsync(string id)
+        {
+            using (var db = new ApplicationDbContext())
+            {
+                var user = await db.Users.FindAsync(id);
+                return user?.MobileNumber;
+            }
         }
     }
 }
