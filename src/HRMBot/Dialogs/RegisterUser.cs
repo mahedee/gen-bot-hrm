@@ -66,10 +66,12 @@ namespace HRMBot.Dialogs
             catch (TooManyAttemptsException)
             {
                 await context.PostAsync("I'm sorry, I'm having issues understanding you. Try again later.");
+                context.Wait(MessageReceived);
             }
             catch (OperationCanceledException)
             {
-
+                await context.PostAsync("You have canceled the mobile verification process");
+                context.Wait(MessageReceived);
             }
             catch (Exception e)
             {
@@ -91,23 +93,23 @@ namespace HRMBot.Dialogs
                 {
                     await context.PostAsync("I'm sorry, I can not confirm your mobile number now. Try again later?");
                 }
+                context.Wait(MessageReceived);
 
             }
             catch (TooManyAttemptsException)
             {
                 await context.PostAsync("I'm sorry, I can not confirm your mobile number now. Try again later.");
+                context.Wait(MessageReceived);
             }
             catch (OperationCanceledException)
             {
-
+                await context.PostAsync("You have canceled the mobile verification process");
+                context.Wait(MessageReceived);
             }
             catch (Exception e)
             {
                 await context.PostAsync(e.Message);
-            }
-            finally
-            {
-                context.Wait(this.MessageReceived);
+                context.Wait(MessageReceived);
             }
             
         }
