@@ -10,7 +10,7 @@ namespace HRMBot.Repository
 {
     public class ApplicationDbContext : DbContext
     {
-        public ApplicationDbContext() : base("Server=(localdb)\\MSSQLLocalDB;Integrated Security=true;") // AttachDbFileName= |DataDirectory|\\myDbFile.mdf;
+        public ApplicationDbContext() : base("Data Source=tcp:mahedee.database.windows.net,1433;Initial Catalog=hrmbotdb;User ID=mahedee;Password=Leads@123") // AttachDbFileName= |DataDirectory|\\myDbFile.mdf;
         {
             
         }
