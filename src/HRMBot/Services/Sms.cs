@@ -19,9 +19,9 @@ namespace HRMBot.Services
                     .Accept
                     .Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                var email = Environment.GetEnvironmentVariable("mymainemail");
-                var password = Environment.GetEnvironmentVariable("smsgateway_password");
-                var device = Environment.GetEnvironmentVariable("smsgateway_device");
+                var email = Environment.GetEnvironmentVariable("APPSETTING_mymainemail");
+                var password = Environment.GetEnvironmentVariable("APPSETTING_smsgateway_password");
+                var device = Environment.GetEnvironmentVariable("APPSETTING_smsgateway_device");
 
                 var content = new FormUrlEncodedContent(new[]
                 {
