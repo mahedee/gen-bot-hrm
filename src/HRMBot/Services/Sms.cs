@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
-using System.Web;
-using HRMBot.Models;
-using Newtonsoft.Json;
 
 namespace HRMBot.Services
 {
@@ -22,12 +18,10 @@ namespace HRMBot.Services
                 client.DefaultRequestHeaders
                     .Accept
                     .Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                //var email = Environment.GetEnvironmentVariable("mymainemail");
-                //var password = Environment.GetEnvironmentVariable("smsgateway_password");
-                //var device = Environment.GetEnvironmentVariable("smsgateway_device");
-                const string email = "ratanparai@gmail.com";
-                const string password = "thisisratan321";
-                const string device = "64960";
+
+                var email = Environment.GetEnvironmentVariable("mymainemail");
+                var password = Environment.GetEnvironmentVariable("smsgateway_password");
+                var device = Environment.GetEnvironmentVariable("smsgateway_device");
 
                 var content = new FormUrlEncodedContent(new[]
                 {
@@ -39,15 +33,7 @@ namespace HRMBot.Services
                 });
 
                 HttpResponseMessage response = await client.PostAsync(apiUrl, content);
-                if (response.IsSuccessStatusCode)
-                {
-                    string result = await response.Content.ReadAsStringAsync();
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+                return response.IsSuccessStatusCode;
             }
         }
     }
