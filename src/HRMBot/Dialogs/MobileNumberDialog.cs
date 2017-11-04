@@ -20,8 +20,9 @@ namespace HRMBot.Dialogs
         private async Task MessageReceivedAsync(IDialogContext context, IAwaitable<IMessageActivity> result)
         {
             var message = await result;
+            int mobileNumber;
 
-            if (int.TryParse(message.Text, out var mobileNumber) && (mobileNumber.ToString().Length == 10))
+            if (int.TryParse(message.Text, out mobileNumber) && (mobileNumber.ToString().Length == 10))
             {
                 context.Done(mobileNumber);
             }
