@@ -39,7 +39,7 @@ namespace HRMBot.Dialogs
                 {
                     context.Fail(new OperationCanceledException(""));
                 }
-                if (_attempts > 0)
+                else if (_attempts > 0)
                 {
                     await context.PostAsync("Sorry I can not verify your OTP code. What is the OTP code you received in SMS?");
 
