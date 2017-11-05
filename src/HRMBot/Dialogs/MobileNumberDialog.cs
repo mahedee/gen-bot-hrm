@@ -33,7 +33,7 @@ namespace HRMBot.Dialogs
                 {
                     context.Fail(new OperationCanceledException(""));   
                 }
-                if (_attempts > 0)
+                else if (_attempts > 0)
                 {
                     await context.PostAsync("I'm sorry, I don't understand your reply. What is your Mobile number (e.g. '01771998817')?");
 
