@@ -21,6 +21,8 @@ namespace HRMBot.Repository.Migrations
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
             //  to avoid creating duplicate seed data.
+
+            /*
             var ratan = context.Employees.FirstOrDefault(p => p.MobileNo.Equals("01771998817"));
             if (ratan == null)
             {
@@ -83,6 +85,7 @@ namespace HRMBot.Repository.Migrations
                 context.LeaveBalances.Add(mahedeeLeaves);
                 context.SaveChanges();
             }
+            */
 
         }
     }

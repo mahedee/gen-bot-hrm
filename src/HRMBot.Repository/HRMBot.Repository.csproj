@@ -74,6 +74,10 @@
     <Compile Include="Migrations\201711111407024_provablefix.Designer.cs">
       <DependentUpon>201711111407024_provablefix.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711111509461_modify-models.cs" />
+    <Compile Include="Migrations\201711111509461_modify-models.Designer.cs">
+      <DependentUpon>201711111509461_modify-models.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="PersonRepository.cs" />
@@ -108,6 +112,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711111407024_provablefix.resx">
       <DependentUpon>201711111407024_provablefix.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711111509461_modify-models.resx">
+      <DependentUpon>201711111509461_modify-models.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

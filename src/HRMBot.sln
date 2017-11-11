@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HRMBot.Repository", "HRMBot
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HRMBot.Models", "HRMBot.Models\HRMBot.Models.csproj", "{1538CF66-46B2-416F-BBAF-C7EDDE259EEE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HRMBot.Web", "HRMBot.Web\HRMBot.Web.csproj", "{78E7E768-E943-431E-872B-248D813CBC89}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{1538CF66-46B2-416F-BBAF-C7EDDE259EEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1538CF66-46B2-416F-BBAF-C7EDDE259EEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1538CF66-46B2-416F-BBAF-C7EDDE259EEE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78E7E768-E943-431E-872B-248D813CBC89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78E7E768-E943-431E-872B-248D813CBC89}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78E7E768-E943-431E-872B-248D813CBC89}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78E7E768-E943-431E-872B-248D813CBC89}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

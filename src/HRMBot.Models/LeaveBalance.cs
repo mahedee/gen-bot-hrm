@@ -12,7 +12,7 @@ namespace HRMBot.Models
     //But ok for just show up quickly
     public class LeaveBalance
     {
-        [Key, ForeignKey("Employee")]
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public int TotalCasualLeave { get; set; }
         public int TotalSickLeave { get; set; }
@@ -20,7 +20,9 @@ namespace HRMBot.Models
         public int AvailedCasualLeave { get; set; }
         public int AvailedSickLeave { get; set; }
         public int AvailedAnnualLeave { get; set; }
+        public int EmployeeId { get; set; }
 
+        [ForeignKey("EmployeeId")]
         public virtual Employee Employee { get; set; }
     }
 }
