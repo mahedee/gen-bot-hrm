@@ -8,9 +8,6 @@ using System.Threading.Tasks;
 
 namespace HRMBot.Models
 {
-    /// <summary>
-    /// <see cref="HRMBot.Models."/>
-    /// </summary>
     public class Employee
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
