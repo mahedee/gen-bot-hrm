@@ -20,7 +20,7 @@ namespace HRMBot.Models
         public string Address { get; set; }
         public string Email { get; set; }
         public string MobileNo { get; set; }
-        public int UserId { get; set; }
+        public int? UserId { get; set; }
         [ForeignKey("UserId")]
         public virtual UserInfo UserInfo { get; set; }
     }
