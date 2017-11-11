@@ -22,11 +22,7 @@ namespace HRMBot
                 ConnectorClient connector = new ConnectorClient(new Uri(activity.ServiceUrl));
 
                 // If user send any images then do not replay antyhing. Just skip it.
-                if (activity.Attachments.Count > 0)
-                {
-
-                }
-                else
+                if (activity.Attachments.Count == 0)
                 {
                     // send typing indicator
                     Activity typeing = activity.CreateReply();
