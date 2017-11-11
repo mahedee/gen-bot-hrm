@@ -16,7 +16,7 @@ namespace HRMBot.Models
         public string Address { get; set; }
         public string MobileNo { get; set; }
 
-        public int UserInfoId { get; set; }
         public virtual UserInfo UserInfo { get; set; }
+
     }
 }

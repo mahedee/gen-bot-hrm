@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,6 +10,8 @@ namespace HRMBot.Models
 {
     public class UserInfo
     {
+        [Key]
+        [ForeignKey("Employee")]
         public int Id { get; set; }
         public string MobileNo { get; set; }
         public string FacebookId { get; set; }
@@ -20,6 +24,8 @@ namespace HRMBot.Models
         //OPT for web chat means chatting from web interface
         //Not sure how to maintain credintial from web interface, will fix later
         public int WebOTP { get; set; }
+
+        public virtual Employee Employee { get; set; }
 
     }
 }

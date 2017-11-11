@@ -58,6 +58,10 @@
     <Compile Include="Migrations\201711110808471_new-schemas.Designer.cs">
       <DependentUpon>201711110808471_new-schemas.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711110831287_fix-relationship.cs" />
+    <Compile Include="Migrations\201711110831287_fix-relationship.Designer.cs">
+      <DependentUpon>201711110831287_fix-relationship.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="PersonRepository.cs" />
@@ -80,6 +84,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711110808471_new-schemas.resx">
       <DependentUpon>201711110808471_new-schemas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711110831287_fix-relationship.resx">
+      <DependentUpon>201711110831287_fix-relationship.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

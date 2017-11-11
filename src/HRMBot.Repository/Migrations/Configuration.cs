@@ -1,3 +1,5 @@
+using HRMBot.Models;
+
 namespace HRMBot.Repository.Migrations
 {
     using System;
@@ -19,6 +21,8 @@ namespace HRMBot.Repository.Migrations
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
             //  to avoid creating duplicate seed data.
+
+            // TODO: Seed database with dummy data
         }
     }
 }
