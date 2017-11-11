@@ -59,5 +59,11 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HRMBot.Models\HRMBot.Models.csproj">
+      <Project>{1538cf66-46b2-416f-bbaf-c7edde259eee}</Project>
+      <Name>HRMBot.Models</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
