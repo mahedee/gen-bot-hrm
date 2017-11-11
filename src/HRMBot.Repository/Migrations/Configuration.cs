@@ -22,7 +22,6 @@ namespace HRMBot.Repository.Migrations
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
             //  to avoid creating duplicate seed data.
 
-            /*
             var ratan = context.Employees.FirstOrDefault(p => p.MobileNo.Equals("01771998817"));
             if (ratan == null)
             {
@@ -31,6 +30,7 @@ namespace HRMBot.Repository.Migrations
                     FullName = "Ratan Sunder Parai",
                     MobileNo = "01771998817",
                     Address = "Dhaka, Bangladesh",
+                    Email = "ratanparai@gmail.com",
                     Designation = "Software Engineer"
                 };
 
@@ -38,12 +38,12 @@ namespace HRMBot.Repository.Migrations
                 context.SaveChanges();
             }
 
-            var ratanLeaves = context.LeaveBalances.Where(p => p.Id.Equals(ratan.Id)).FirstOrDefault();
+            var ratanLeaves = context.LeaveBalances.FirstOrDefault(p => p.Id.Equals(ratan.Id));
             if (ratanLeaves == null)
             {
                 ratanLeaves = new LeaveBalance
                 {
-                    Id = ratan.Id,
+                    EmployeeId = ratan.Id,
                     TotalAnnualLeave = 20,
                     TotalCasualLeave = 10,
                     TotalSickLeave = 14,
@@ -74,7 +74,7 @@ namespace HRMBot.Repository.Migrations
             {
                 mahedeeLeaves = new LeaveBalance
                 {
-                    Id = mahedee.Id,
+                    EmployeeId = mahedee.Id,
                     TotalAnnualLeave = 30,
                     TotalCasualLeave = 20,
                     TotalSickLeave = 14,
@@ -85,7 +85,6 @@ namespace HRMBot.Repository.Migrations
                 context.LeaveBalances.Add(mahedeeLeaves);
                 context.SaveChanges();
             }
-            */
 
         }
     }
