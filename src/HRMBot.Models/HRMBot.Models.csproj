@@ -45,6 +45,7 @@
     <Compile Include="Employee.cs" />
     <Compile Include="LeaveBalance.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QuickEntryVM.cs" />
     <Compile Include="UserInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

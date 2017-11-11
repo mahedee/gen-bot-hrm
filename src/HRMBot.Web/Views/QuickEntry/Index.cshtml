@@ -1,0 +1,75 @@
+﻿@model IEnumerable<HRMBot.Models.UserInfo>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.MobileNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FacebookId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FacebookOTP)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SkypeId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SkypeOTP)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SlackId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SlackOTP)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.WebOTP)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.MobileNo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FacebookId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FacebookOTP)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SkypeId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SkypeOTP)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SlackId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SlackOTP)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.WebOTP)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>
