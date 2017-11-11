@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Data.Entity;
+using System.Data.Entity.Core;
 using System.Threading.Tasks;
+using HRMBot.Models;
 using HRMBot.Repository.Models;
 
 namespace HRMBot.Repository
@@ -7,35 +10,39 @@ namespace HRMBot.Repository
     public class UserRegisterRepository : IUserRegisterRepository
     {
 
-        public async Task<string> GenerateOtpCodeAsync(string id, string mobileNumber, string name)
+        public async Task<int> GenerateOtpCodeAsync(string id, string mobileNumber, string name)
         {
 
-            //TODO: check if the mobile number is already in the database if it isn't in the databasse throw execption
 
             var generator = new Random();
-            var otp = generator.Next(100000, 1000000).ToString();
+            var otp = generator.Next(100000, 1000000);
 
             // store the otp with user id
             using (var db = new ApplicationDbContext())
             {
-                var user = await db.Users.FindAsync(id);
-                if (user == null)
-                {
-                    user = new User
-                    {
-                        UserId = id,
-                        OneTimePassword = otp,
-                        TemporaryMobileNumber = mobileNumber,
-                        Name = name
-                    };
 
-                    db.Users.Add(user);
+                var employee = await db.Employees.FirstOrDefaultAsync(p => p.MobileNo.Equals(mobileNumber));
+                if (employee == null)
+                {
+                    throw new ObjectNotFoundException("Mobile number is not in database");
+                }
+
+                // if there is no userInfo link then create new UserInfo entry
+                if (employee?.UserId == null)
+                {
+                    var userInfo = new UserInfo
+                    {
+                        FacebookId = id,
+                        FacebookOTP = otp
+                    };
                 }
                 else
                 {
-                    user.OneTimePassword = otp;
-                    user.TemporaryMobileNumber = mobileNumber;
+                    employee.UserInfo.FacebookId = id;
+                    employee.UserInfo.FacebookOTP = otp;
                 }
+
+                
 
                 await db.SaveChangesAsync();
             }
