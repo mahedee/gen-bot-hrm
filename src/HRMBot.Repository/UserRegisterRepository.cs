@@ -10,6 +10,8 @@ namespace HRMBot.Repository
         public async Task<string> GenerateOtpCodeAsync(string id, string mobileNumber, string name)
         {
 
+            //TODO: check if the mobile number is already in the database if it isn't in the databasse throw execption
+
             var generator = new Random();
             var otp = generator.Next(100000, 1000000).ToString();
 
