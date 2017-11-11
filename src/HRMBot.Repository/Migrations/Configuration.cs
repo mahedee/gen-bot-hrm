@@ -22,7 +22,25 @@ namespace HRMBot.Repository.Migrations
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
             //  to avoid creating duplicate seed data.
 
-            // TODO: Seed database with dummy data
+            Employee[] employees =
+            {
+                new Employee
+                {
+                    FullName = "Ratan Sunder Parai",
+                    Designation = "Software Engineer",
+                    MobileNo = "01771998817",
+                    Address = "Dhaka, Bangladesh"
+                },
+                new Employee
+                {
+                    FullName = "Md. Mahedee Hasan",
+                    Designation = "Senior Software Architect",
+                    MobileNo = "01787139383",
+                    Address = "Dhaka, Bangladesh"
+                }
+            };
+
+            context.Employees.AddOrUpdate(employees);
         }
     }
 }

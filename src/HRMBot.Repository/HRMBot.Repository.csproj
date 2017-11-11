@@ -62,6 +62,10 @@
     <Compile Include="Migrations\201711110831287_fix-relationship.Designer.cs">
       <DependentUpon>201711110831287_fix-relationship.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711110911170_designation-and-seed-data.cs" />
+    <Compile Include="Migrations\201711110911170_designation-and-seed-data.Designer.cs">
+      <DependentUpon>201711110911170_designation-and-seed-data.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="PersonRepository.cs" />
@@ -87,6 +91,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711110831287_fix-relationship.resx">
       <DependentUpon>201711110831287_fix-relationship.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711110911170_designation-and-seed-data.resx">
+      <DependentUpon>201711110911170_designation-and-seed-data.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
