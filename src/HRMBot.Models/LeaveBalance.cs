@@ -12,8 +12,7 @@ namespace HRMBot.Models
     //But ok for just show up quickly
     public class LeaveBalance
     {
-        [Key]
-        [ForeignKey("Employee")]
+        [Key, ForeignKey("Employee")]
         public int Id { get; set; }
         public int TotalCasualLeave { get; set; }
         public int TotalSickLeave { get; set; }

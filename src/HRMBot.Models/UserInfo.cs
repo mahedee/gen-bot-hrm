@@ -10,8 +10,7 @@ namespace HRMBot.Models
 {
     public class UserInfo
     {
-        [Key]
-        [ForeignKey("Employee")]
+        [Key, ForeignKey("Employee")]
         public int Id { get; set; }
         public string MobileNo { get; set; }
         public string FacebookId { get; set; }

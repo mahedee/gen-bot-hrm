@@ -66,6 +66,14 @@
     <Compile Include="Migrations\201711110911170_designation-and-seed-data.Designer.cs">
       <DependentUpon>201711110911170_designation-and-seed-data.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711111335011_leave-model-update.cs" />
+    <Compile Include="Migrations\201711111335011_leave-model-update.Designer.cs">
+      <DependentUpon>201711111335011_leave-model-update.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711111407024_provablefix.cs" />
+    <Compile Include="Migrations\201711111407024_provablefix.Designer.cs">
+      <DependentUpon>201711111407024_provablefix.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="PersonRepository.cs" />
@@ -94,6 +102,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711110911170_designation-and-seed-data.resx">
       <DependentUpon>201711110911170_designation-and-seed-data.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711111335011_leave-model-update.resx">
+      <DependentUpon>201711111335011_leave-model-update.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711111407024_provablefix.resx">
+      <DependentUpon>201711111407024_provablefix.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

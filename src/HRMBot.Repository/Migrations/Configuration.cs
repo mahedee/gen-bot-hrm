@@ -21,8 +21,8 @@ namespace HRMBot.Repository.Migrations
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
             //  to avoid creating duplicate seed data.
-            var ratan = context.Employees.First(p => p.MobileNo.Equals("01771998817"));
-            if (ratan != null)
+            var ratan = context.Employees.FirstOrDefault(p => p.MobileNo.Equals("01771998817"));
+            if (ratan == null)
             {
                 ratan = new Employee
                 {
@@ -34,10 +34,14 @@ namespace HRMBot.Repository.Migrations
 
                 context.Employees.Add(ratan);
                 context.SaveChanges();
+            }
 
-                var ratanLeaves = new LeaveBalance
+            var ratanLeaves = context.LeaveBalances.Where(p => p.Id.Equals(ratan.Id)).FirstOrDefault();
+            if (ratanLeaves == null)
+            {
+                ratanLeaves = new LeaveBalance
                 {
-                    Employee = ratan,
+                    Id = ratan.Id,
                     TotalAnnualLeave = 20,
                     TotalCasualLeave = 10,
                     TotalSickLeave = 14,
@@ -49,8 +53,8 @@ namespace HRMBot.Repository.Migrations
                 context.SaveChanges();
             }
 
-            var mahedee = context.Employees.First(p => p.MobileNo.Equals("01787139383"));
-            if (mahedee != null)
+            var mahedee = context.Employees.FirstOrDefault(p => p.MobileNo.Equals("01787139383"));
+            if (mahedee == null)
             {
                 mahedee = new Employee
                 {
@@ -61,10 +65,14 @@ namespace HRMBot.Repository.Migrations
                 };
                 context.Employees.Add(mahedee);
                 context.SaveChanges();
+            }
 
-                var mahedeeLeaves = new LeaveBalance
+            var mahedeeLeaves = context.LeaveBalances.FirstOrDefault(p => p.Id == mahedee.Id);
+            if (mahedeeLeaves == null)
+            {
+                mahedeeLeaves = new LeaveBalance
                 {
-                    Employee = ratan,
+                    Id = mahedee.Id,
                     TotalAnnualLeave = 30,
                     TotalCasualLeave = 20,
                     TotalSickLeave = 14,
@@ -74,7 +82,6 @@ namespace HRMBot.Repository.Migrations
                 };
                 context.LeaveBalances.Add(mahedeeLeaves);
                 context.SaveChanges();
-
             }
 
         }
