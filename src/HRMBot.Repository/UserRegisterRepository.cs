@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data.Entity;
 using System.Data.Entity.Core;
+using System.Linq;
 using System.Threading.Tasks;
 using HRMBot.Models;
 using HRMBot.Repository.Models;
@@ -10,7 +11,7 @@ namespace HRMBot.Repository
     public class UserRegisterRepository : IUserRegisterRepository
     {
 
-        public async Task<int> GenerateOtpCodeAsync(string id, string mobileNumber, string name)
+        public async Task<int> GenerateOtpCodeAsync(string channelId, string id, string mobileNumber, string name)
         {
 
 
@@ -21,58 +22,64 @@ namespace HRMBot.Repository
             using (var db = new ApplicationDbContext())
             {
 
-                var employee = await db.Employees.FirstOrDefaultAsync(p => p.MobileNo.Equals(mobileNumber));
-                if (employee == null)
+                var userInfo = await db.UserInfos.FirstOrDefaultAsync(p => p.MobileNo.Equals(mobileNumber));
+                if (userInfo == null)
                 {
                     throw new ObjectNotFoundException("Mobile number is not in database");
                 }
 
                 // if there is no userInfo link then create new UserInfo entry
-                if (employee?.UserId == null)
+                if (channelId.Equals("facebook"))
                 {
-                    var userInfo = new UserInfo
-                    {
-                        FacebookId = id,
-                        FacebookOTP = otp
-                    };
+                    userInfo.FacebookId = id;
+                    userInfo.FacebookOTP = otp;
+                } else if (channelId.Equals("skype"))
+                {
+                    userInfo.SkypeId = id;
+                    userInfo.SkypeOTP = otp;
                 }
                 else
                 {
-                    employee.UserInfo.FacebookId = id;
-                    employee.UserInfo.FacebookOTP = otp;
+                    throw new PlatformNotSupportedException("Chat medium not supported");
                 }
-
-                
 
                 await db.SaveChangesAsync();
             }
             return otp;
         }
 
-        public async Task<bool> VarifyOtpAsync(string id, string otp)
+        public async Task<bool> VarifyOtpAsync(string channelId, string id, string otp)
         {
             var success = false;
+            UserInfo userInfo;
             using (var db = new ApplicationDbContext())
             {
-                var user = await db.Users.FindAsync(id);
-                // check if otp matches
-                if (user?.OneTimePassword != null && user.OneTimePassword.Equals(otp.Trim()))
+                if (channelId.Equals("facebook"))
                 {
-                    user.MobileNumber = user.TemporaryMobileNumber;
-                    await db.SaveChangesAsync();
-                    success = true;
                 }
             }
 
             return success;
         }
 
-        public async Task<string> isAlreadyVerifiedAsync(string id)
+        public async Task<string> IsAlreadyVerifiedAsync(string channelId, string id)
         {
             using (var db = new ApplicationDbContext())
             {
-                var user = await db.Users.FindAsync(id);
-                return user?.MobileNumber;
+                UserInfo user;
+                if (channelId.Equals("facebook"))
+                {
+                    user = await db.UserInfos.FirstOrDefaultAsync(p => p.FacebookId.Equals(id));
+                } else if (channelId.Equals("skype"))
+                {
+                    user = await db.UserInfos.FirstOrDefaultAsync(p => p.SkypeId.Equals(id));
+                }
+                else
+                {
+                    throw new PlatformNotSupportedException("Chat medium not supported");
+                }
+                // var user = await db.Users.FindAsync(id);
+                return user?.MobileNo;
             }
         }
     }

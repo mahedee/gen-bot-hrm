@@ -21,7 +21,7 @@ namespace HRMBot.Dialogs
             //context.Wait(this.MessageReceived
 
             var repo = new UserRegisterRepository();
-            var registerdMobile = await repo.isAlreadyVerifiedAsync(context.Activity.From.Id);
+            var registerdMobile = await repo.IsAlreadyVerifiedAsync(context.Activity.ChannelId, context.Activity.From.Id);
 
             if (registerdMobile != null)
             {
@@ -45,7 +45,7 @@ namespace HRMBot.Dialogs
 
                 // generate otp and sent it to mobile
                 var repo = new UserRegisterRepository();
-                var otp = await repo.GenerateOtpCodeAsync(context.Activity.From.Id, mobileNumber.ToString("D11"), context.Activity.From.Name);
+                var otp = await repo.GenerateOtpCodeAsync(context.Activity.ChannelId, context.Activity.From.Id, mobileNumber.ToString("D11"), context.Activity.From.Name);
                 // send varification message
                 // await context.PostAsync($"Your generated otp code is {otp}");
                 string message = $"Your verification code for the HRMBot is {otp}";
