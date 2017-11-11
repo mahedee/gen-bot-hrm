@@ -21,26 +21,62 @@ namespace HRMBot.Repository.Migrations
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
             //  to avoid creating duplicate seed data.
-
-            Employee[] employees =
+            var ratan = context.Employees.First(p => p.MobileNo.Equals("01771998817"));
+            if (ratan != null)
             {
-                new Employee
+                ratan = new Employee
                 {
                     FullName = "Ratan Sunder Parai",
-                    Designation = "Software Engineer",
                     MobileNo = "01771998817",
-                    Address = "Dhaka, Bangladesh"
-                },
-                new Employee
+                    Address = "Dhaka, Bangladesh",
+                    Designation = "Software Engineer"
+                };
+
+                context.Employees.Add(ratan);
+                context.SaveChanges();
+
+                var ratanLeaves = new LeaveBalance
+                {
+                    Employee = ratan,
+                    TotalAnnualLeave = 20,
+                    TotalCasualLeave = 10,
+                    TotalSickLeave = 14,
+                    AvailedAnnualLeave = 10,
+                    AvailedCasualLeave = 5,
+                    AvailedSickLeave = 6
+                };
+                context.LeaveBalances.Add(ratanLeaves);
+                context.SaveChanges();
+            }
+
+            var mahedee = context.Employees.First(p => p.MobileNo.Equals("01787139383"));
+            if (mahedee != null)
+            {
+                mahedee = new Employee
                 {
                     FullName = "Md. Mahedee Hasan",
-                    Designation = "Senior Software Architect",
                     MobileNo = "01787139383",
-                    Address = "Dhaka, Bangladesh"
-                }
-            };
+                    Address = "Dhaka",
+                    Designation = "Senior Software Architect"
+                };
+                context.Employees.Add(mahedee);
+                context.SaveChanges();
 
-            context.Employees.AddOrUpdate(employees);
+                var mahedeeLeaves = new LeaveBalance
+                {
+                    Employee = ratan,
+                    TotalAnnualLeave = 30,
+                    TotalCasualLeave = 20,
+                    TotalSickLeave = 14,
+                    AvailedAnnualLeave = 22,
+                    AvailedCasualLeave = 8,
+                    AvailedSickLeave = 12
+                };
+                context.LeaveBalances.Add(mahedeeLeaves);
+                context.SaveChanges();
+
+            }
+
         }
     }
 }
