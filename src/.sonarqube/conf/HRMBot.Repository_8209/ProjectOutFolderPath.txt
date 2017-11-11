@@ -1,1 +1,0 @@
-D:\Codes\Projects\Others\Mahedee\gen-bot-hrm\src\.sonarqube\out\\HRMBot.Repository_8209
