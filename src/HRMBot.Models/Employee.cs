@@ -18,6 +18,6 @@ namespace HRMBot.Models
         public string MobileNo { get; set; }
 
         public virtual UserInfo UserInfo { get; set; }
-
+        public virtual LeaveBalance LeaveBalance { get; set; }
     }
 }
