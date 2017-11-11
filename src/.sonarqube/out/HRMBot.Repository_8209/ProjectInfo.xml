@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ProjectInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.sonarsource.com/msbuild/integration/2015/1">
+  <ProjectName>HRMBot.Repository</ProjectName>
+  <ProjectLanguage>C#</ProjectLanguage>
+  <ProjectType>Product</ProjectType>
+  <ProjectGuid>e86d8f48-5fd5-4883-b0d5-b95e63f8023a</ProjectGuid>
+  <FullPath>D:\Codes\Projects\Others\Mahedee\gen-bot-hrm\src\HRMBot.Repository\HRMBot.Repository.csproj</FullPath>
+  <IsExcluded>false</IsExcluded>
+  <AnalysisResults>
+    <AnalysisResult Id="FilesToAnalyze" Location="D:\Codes\Projects\Others\Mahedee\gen-bot-hrm\src\.sonarqube\out\\HRMBot.Repository_8209\FilesToAnalyze.txt" />
+  </AnalysisResults>
+  <AnalysisSettings>
+    <Property Name="sonar.cs.roslyn.reportFilePath">D:\Codes\Projects\Others\Mahedee\gen-bot-hrm\src\HRMBot.Repository\bin\Debug\HRMBot.Repository.dll.RoslynCA.json</Property>
+    <Property Name="sonar.cs.analyzer.projectOutPath">D:\Codes\Projects\Others\Mahedee\gen-bot-hrm\src\.sonarqube\out\\HRMBot.Repository_8209</Property>
+    <Property Name="sonar.stylecop.projectFilePath">D:\Codes\Projects\Others\Mahedee\gen-bot-hrm\src\HRMBot.Repository\HRMBot.Repository.csproj</Property>
+  </AnalysisSettings>
+</ProjectInfo>

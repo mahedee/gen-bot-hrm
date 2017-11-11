@@ -1,0 +1,12 @@
+c
+ZD:\Codes\Projects\Others\Mahedee\gen-bot-hrm\src\HRMBot.Repository\ApplicationDbContext.csutf-8f
+]D:\Codes\Projects\Others\Mahedee\gen-bot-hrm\src\HRMBot.Repository\IUserRegisterRepository.csutf-8w
+nD:\Codes\Projects\Others\Mahedee\gen-bot-hrm\src\HRMBot.Repository\Migrations\201711041219471_InitialCreate.csutf-8u
+lD:\Codes\Projects\Others\Mahedee\gen-bot-hrm\src\HRMBot.Repository\Migrations\201711110808471_new-schemas.csutf-8z
+qD:\Codes\Projects\Others\Mahedee\gen-bot-hrm\src\HRMBot.Repository\Migrations\201711110831287_fix-relationship.csutf-8ƒ
+zD:\Codes\Projects\Others\Mahedee\gen-bot-hrm\src\HRMBot.Repository\Migrations\201711110911170_designation-and-seed-data.csutf-8g
+^D:\Codes\Projects\Others\Mahedee\gen-bot-hrm\src\HRMBot.Repository\Migrations\Configuration.csutf-8Z
+QD:\Codes\Projects\Others\Mahedee\gen-bot-hrm\src\HRMBot.Repository\Models\User.csutf-8_
+VD:\Codes\Projects\Others\Mahedee\gen-bot-hrm\src\HRMBot.Repository\PersonRepository.csutf-8f
+]D:\Codes\Projects\Others\Mahedee\gen-bot-hrm\src\HRMBot.Repository\Properties\AssemblyInfo.csutf-8e
+\D:\Codes\Projects\Others\Mahedee\gen-bot-hrm\src\HRMBot.Repository\UserRegisterRepository.csutf-8
