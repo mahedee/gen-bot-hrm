@@ -24,7 +24,6 @@ namespace HRMBot
                 // If user send any images then do not replay antyhing. Just skip it.
                 if (activity.Attachments.Count > 0)
                 {
-                    // TODO: Send read receipt if possible
 
                 }
                 else
@@ -32,13 +31,11 @@ namespace HRMBot
                     // send typing indicator
                     Activity typeing = activity.CreateReply();
                     typeing.Type = ActivityTypes.Typing;
-                    // reply.Text = null;
                     await connector.Conversations.ReplyToActivityAsync(typeing);
 
                     var userData = activity.From.Name;
 
                     await Conversation.SendAsync(activity, () => new Dialogs.RootLuisDialog(userData));
-                    //await Conversation.SendAsync(activity, () => new Dialogs.RootLuisDialog());
                 }
             }
             else
