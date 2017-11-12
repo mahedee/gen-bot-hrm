@@ -34,6 +34,8 @@ namespace HRMBot.Repository
                 {
                     tempOtp.ChannelId = channelId;
                     tempOtp.Otp = otp;
+                    tempOtp.FromId = id;
+                    tempOtp.UserId = userInfo.Id;
                 } 
                 else
                 {
@@ -47,16 +49,26 @@ namespace HRMBot.Repository
 
         public async Task<bool> VarifyOtpAsync(string channelId, string id, string otp)
         {
-            var success = false;
-            UserInfo userInfo;
             using (var db = new ApplicationDbContext())
             {
+                var tempOtp = await db.TempOtps.Where(p => p.FromId.Equals(id) && p.ChannelId.Equals(channelId) && p.Otp.Equals(otp))
+                    .FirstOrDefaultAsync();
+                if (tempOtp == null) return false;
+                var userInfo = await db.UserInfos.Where(p => p.Id == tempOtp.UserId).FirstOrDefaultAsync();
                 if (channelId.Equals("facebook"))
                 {
+                    userInfo.FacebookId = id;
+                } else if (channelId.Equals("skype"))
+                {
+                    userInfo.SkypeId = id;
                 }
+                // remove entry from TempOtp table
+                db.TempOtps.Remove(tempOtp);
+                await db.SaveChangesAsync();
+                
+                return true;
             }
 
-            return success;
         }
 
         public async Task<string> IsAlreadyVerifiedAsync(string channelId, string id)

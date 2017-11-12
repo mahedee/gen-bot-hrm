@@ -11,6 +11,7 @@ namespace HRMBot.Models
         public int TempOtpId { get; set; }
         public string ChannelId { get; set; }
         public string Otp { get; set; }
+        public string FromId { get; set; }
         public int UserId { get; set; }
     }
 }

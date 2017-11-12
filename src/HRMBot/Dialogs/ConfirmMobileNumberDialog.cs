@@ -26,7 +26,7 @@ namespace HRMBot.Dialogs
             var confirmCode = await result;
 
             var repo = new UserRegisterRepository();
-            var success = await repo.VarifyOtpAsync(context.Activity.From.Id, confirmCode.Text);
+            var success = await repo.VarifyOtpAsync(context.Activity.ChannelId, context.Activity.From.Id, confirmCode.Text);
 
             if (success)
             {
