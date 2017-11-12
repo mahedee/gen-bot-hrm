@@ -208,6 +208,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\HRMBot.Models\HRMBot.Models.csproj">
+      <Project>{1538CF66-46B2-416F-BBAF-C7EDDE259EEE}</Project>
+      <Name>HRMBot.Models</Name>
+    </ProjectReference>
     <ProjectReference Include="..\HRMBot.Repository\HRMBot.Repository.csproj">
       <Project>{e86d8f48-5fd5-4883-b0d5-b95e63f8023a}</Project>
       <Name>HRMBot.Repository</Name>
