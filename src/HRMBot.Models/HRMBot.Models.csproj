@@ -45,11 +45,8 @@
     <Compile Include="Employee.cs" />
     <Compile Include="LeaveBalance.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-<<<<<<< HEAD
     <Compile Include="QuickEntryVM.cs" />
-=======
     <Compile Include="TempOtp.cs" />
->>>>>>> 08a66194fa1f031f83fc76f4d5cda20ad3324712
     <Compile Include="UserInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
