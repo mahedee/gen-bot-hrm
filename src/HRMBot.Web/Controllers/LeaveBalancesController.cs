@@ -11,127 +11,112 @@ using HRMBot.Repository;
 
 namespace HRMBot.Web.Controllers
 {
-    public class QuickEntryController : Controller
+    public class LeaveBalancesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: QuickEntry
+        // GET: LeaveBalances
         public ActionResult Index()
         {
-            return View(db.UserInfos.ToList());
+            var leaveBalances = db.LeaveBalances.Include(l => l.Employee);
+            return View(leaveBalances.ToList());
         }
 
-        // GET: QuickEntry/Details/5
+        // GET: LeaveBalances/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            UserInfo userInfo = db.UserInfos.Find(id);
-            if (userInfo == null)
+            LeaveBalance leaveBalance = db.LeaveBalances.Find(id);
+            if (leaveBalance == null)
             {
                 return HttpNotFound();
             }
-            return View(userInfo);
+            return View(leaveBalance);
         }
 
-        // GET: QuickEntry/Create
+        // GET: LeaveBalances/Create
         public ActionResult Create()
         {
+            ViewBag.EmployeeId = new SelectList(db.Employees, "Id", "FullName");
             return View();
         }
 
-        // POST: QuickEntry/Create
+        // POST: LeaveBalances/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(QuickEntryVM quickEntryVM)
+        public ActionResult Create([Bind(Include = "Id,TotalCasualLeave,TotalSickLeave,TotalAnnualLeave,AvailedCasualLeave,AvailedSickLeave,AvailedAnnualLeave,EmployeeId")] LeaveBalance leaveBalance)
         {
             if (ModelState.IsValid)
             {
-                UserInfo userInfo = new UserInfo();
-                userInfo.MobileNo = quickEntryVM.MobileNo;
-
-                Employee employee = new Employee();
-                employee.FullName = quickEntryVM.EmployeeName;
-                employee.UserInfo = userInfo;
-
-                Random random = new Random();
-                //int rInt = r.Next(0, 100); //for ints
-
-                LeaveBalance leaveBalance = new LeaveBalance();
-                leaveBalance.TotalAnnualLeave = 20;
-                leaveBalance.TotalCasualLeave = 10;
-                leaveBalance.TotalSickLeave = 13;
-                leaveBalance.AvailedAnnualLeave = random.Next(0,20); //Generate random int value in a range
-                leaveBalance.AvailedCasualLeave = random.Next(0,10);
-                leaveBalance.AvailedSickLeave = random.Next(0,13);
-                leaveBalance.Employee = employee;
-
-                //db.UserInfos.Add(userInfo);
                 db.LeaveBalances.Add(leaveBalance);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(quickEntryVM);
+            ViewBag.EmployeeId = new SelectList(db.Employees, "Id", "FullName", leaveBalance.EmployeeId);
+            return View(leaveBalance);
         }
 
-        // GET: QuickEntry/Edit/5
+        // GET: LeaveBalances/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            UserInfo userInfo = db.UserInfos.Find(id);
-            if (userInfo == null)
+            LeaveBalance leaveBalance = db.LeaveBalances.Find(id);
+            if (leaveBalance == null)
             {
                 return HttpNotFound();
             }
-            return View(userInfo);
+            ViewBag.EmployeeId = new SelectList(db.Employees, "Id", "FullName", leaveBalance.EmployeeId);
+            return View(leaveBalance);
         }
 
-        // POST: QuickEntry/Edit/5
+        // POST: LeaveBalances/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,MobileNo,FacebookId,FacebookOTP,SkypeId,SkypeOTP,SlackId,SlackOTP,WebOTP")] UserInfo userInfo)
+        public ActionResult Edit([Bind(Include = "Id,TotalCasualLeave,TotalSickLeave,TotalAnnualLeave,AvailedCasualLeave,AvailedSickLeave,AvailedAnnualLeave,EmployeeId")] LeaveBalance leaveBalance)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(userInfo).State = EntityState.Modified;
+                db.Entry(leaveBalance).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(userInfo);
+            ViewBag.EmployeeId = new SelectList(db.Employees, "Id", "FullName", leaveBalance.EmployeeId);
+            return View(leaveBalance);
         }
 
-        // GET: QuickEntry/Delete/5
+        // GET: LeaveBalances/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            UserInfo userInfo = db.UserInfos.Find(id);
-            if (userInfo == null)
+            LeaveBalance leaveBalance = db.LeaveBalances.Find(id);
+            if (leaveBalance == null)
             {
                 return HttpNotFound();
             }
-            return View(userInfo);
+            return View(leaveBalance);
         }
 
-        // POST: QuickEntry/Delete/5
+        // POST: LeaveBalances/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            UserInfo userInfo = db.UserInfos.Find(id);
-            db.UserInfos.Remove(userInfo);
+            LeaveBalance leaveBalance = db.LeaveBalances.Find(id);
+            db.LeaveBalances.Remove(leaveBalance);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

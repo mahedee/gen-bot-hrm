@@ -1,0 +1,74 @@
+﻿@model HRMBot.Models.LeaveBalance
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>LeaveBalance</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Employee.FullName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Employee.FullName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalCasualLeave)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalCasualLeave)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalSickLeave)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalSickLeave)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalAnnualLeave)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalAnnualLeave)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AvailedCasualLeave)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AvailedCasualLeave)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AvailedSickLeave)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AvailedSickLeave)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AvailedAnnualLeave)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AvailedAnnualLeave)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
