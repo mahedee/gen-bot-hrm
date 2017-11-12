@@ -1,0 +1,80 @@
+﻿@model HRMBot.Models.LeaveBalance
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>LeaveBalance</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Employee.FullName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Employee.FullName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalCasualLeave)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalCasualLeave)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalSickLeave)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalSickLeave)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalAnnualLeave)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalAnnualLeave)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AvailedCasualLeave)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AvailedCasualLeave)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AvailedSickLeave)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AvailedSickLeave)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AvailedAnnualLeave)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AvailedAnnualLeave)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

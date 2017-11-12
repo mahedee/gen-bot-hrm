@@ -1,0 +1,69 @@
+﻿@model IEnumerable<HRMBot.Models.LeaveBalance>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Employee.FullName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalCasualLeave)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalSickLeave)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalAnnualLeave)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AvailedCasualLeave)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AvailedSickLeave)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AvailedAnnualLeave)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Employee.FullName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TotalCasualLeave)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TotalSickLeave)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TotalAnnualLeave)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AvailedCasualLeave)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AvailedSickLeave)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AvailedAnnualLeave)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

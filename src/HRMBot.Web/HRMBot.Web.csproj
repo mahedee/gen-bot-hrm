@@ -148,7 +148,9 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LeaveBalancesController.cs" />
     <Compile Include="Controllers\QuickEntryController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -198,6 +200,16 @@
     <Content Include="Views\QuickEntry\Details.cshtml" />
     <Content Include="Views\QuickEntry\Edit.cshtml" />
     <Content Include="Views\QuickEntry\Index.cshtml" />
+    <Content Include="Views\Employees\Create.cshtml" />
+    <Content Include="Views\Employees\Delete.cshtml" />
+    <Content Include="Views\Employees\Details.cshtml" />
+    <Content Include="Views\Employees\Edit.cshtml" />
+    <Content Include="Views\Employees\Index.cshtml" />
+    <Content Include="Views\LeaveBalances\Create.cshtml" />
+    <Content Include="Views\LeaveBalances\Delete.cshtml" />
+    <Content Include="Views\LeaveBalances\Details.cshtml" />
+    <Content Include="Views\LeaveBalances\Edit.cshtml" />
+    <Content Include="Views\LeaveBalances\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
