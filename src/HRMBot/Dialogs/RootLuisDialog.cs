@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Authentication;
 using System.Web;
 using Microsoft.Bot.Builder.Luis;
 using Microsoft.Bot.Builder.Luis.Models;
@@ -8,6 +9,7 @@ using Microsoft.Bot.Builder.Dialogs;
 using System.Threading.Tasks;
 using Microsoft.Bot.Connector;
 using HRMBot.Extensions;
+using HRMBot.Repository;
 
 namespace HRMBot.Dialogs
 {
@@ -25,35 +27,52 @@ namespace HRMBot.Dialogs
         [LuisIntent("AvailableLeave")]
         public async Task AvailableLeave(IDialogContext context, LuisResult result)
         {
-            //(result.Entities).Items[0]).Resolution).Items[0]).Value
-            string message = "You have {0} days of {1} available.";
-
-            switch(result.GetResolvedListEntity("LeaveType"))
+            try
             {
-                case "SickLeave":
-                    message = String.Format(message, 13, "sick leaves");
-                    break;
+                var repo = new LeaveRepository();
+                var leave = await repo.LeaveAsync(context.Activity.From.Id, context.Activity.ChannelId);
 
-                case "AnnualLeave":
-                    message = String.Format(message, 37, "annual leaves");
-                    break;
 
-                case "CasualLeave":
-                    message = String.Format(message, 9, "casual leave");
-                    break;
+                var message = "You have {0} days of {1} available.";
 
-                default:
-                    message = String.Format(message, 59, "total leaves");
-                    break;
+                switch (result.GetResolvedListEntity("LeaveType"))
+                {
+                    case "SickLeave":
+                        message = string.Format(message, leave.TotalSickLeave - leave.AvailedSickLeave, "sick leaves");
+                        break;
+
+                    case "AnnualLeave":
+                        message = string.Format(message, leave.TotalAnnualLeave - leave.AvailedAnnualLeave, "annual leaves");
+                        break;
+
+                    case "CasualLeave":
+                        message = string.Format(message, leave.TotalCasualLeave - leave.AvailedCasualLeave, "casual leave");
+                        break;
+
+                    default:
+                        message = string.Format(message, leave.AvailedAnnualLeave + leave.AvailedSickLeave + leave.AvailedCasualLeave, "total leaves");
+                        break;
+                }
+
+                // message += result.GetResolvedListEntity("LeaveType");
+
+                await context.PostAsync(message);
+                context.Wait(this.MessageReceived);
+
             }
-
-            // message += result.GetResolvedListEntity("LeaveType");
-
-            await context.PostAsync(message);
-            context.Wait(this.MessageReceived);
-
-
+            catch (AuthenticationException)
+            {
+                await context.PostAsync(
+                    "You need to verify yourself before I can provide you this information. Please write verify to start the procecss");
+                context.Wait(MessageReceived);
+            }
+            catch (PlatformNotSupportedException)
+            {
+                await context.PostAsync("This chat platform is not yet supported. Please use Facebook or skype");
+                context.Wait(MessageReceived);
+            }
         }
+
 
         [LuisIntent("")]
         [LuisIntent("None")]
