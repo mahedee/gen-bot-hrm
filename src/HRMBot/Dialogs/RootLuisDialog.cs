@@ -13,7 +13,8 @@ using HRMBot.Repository;
 
 namespace HRMBot.Dialogs
 {
-    [LuisModel("6f13a4ce-dabe-485a-bb3f-9aba3156ea95", "5ea418ae538a402a9b99a936389fd0e7", domain: "westus.api.cognitive.microsoft.com")]
+    [LuisModel("6f13a4ce-dabe-485a-bb3f-9aba3156ea95", "5ea418ae538a402a9b99a936389fd0e7",
+        domain: "westus.api.cognitive.microsoft.com")]
     [Serializable]
     public partial class RootLuisDialog : LuisDialog<object>
     {
@@ -38,15 +39,18 @@ namespace HRMBot.Dialogs
                 switch (result.GetResolvedListEntity("LeaveType"))
                 {
                     case "SickLeave":
-                        message = string.Format(message, leave.TotalSickLeave - leave.AvailedSickLeave, "sick leaves");
+                        message = string.Format(message, (leave.TotalSickLeave - leave.AvailedSickLeave),
+                            "sick leaves");
                         break;
 
                     case "AnnualLeave":
-                        message = string.Format(message, leave.TotalAnnualLeave - leave.AvailedAnnualLeave, "annual leaves");
+                        message = string.Format(message, (leave.TotalAnnualLeave - leave.AvailedAnnualLeave),
+                            "annual leaves");
                         break;
 
                     case "CasualLeave":
-                        message = string.Format(message, leave.TotalCasualLeave - leave.AvailedCasualLeave, "casual leave");
+                        message = string.Format(message, (leave.TotalCasualLeave - leave.AvailedCasualLeave),
+                            "casual leave");
                         break;
 
                     default:
@@ -82,8 +86,8 @@ namespace HRMBot.Dialogs
         public async Task None(IDialogContext context, LuisResult result)
         {
             string message = $"Sorry, I don’t have answer of this question. " +
-                $"I am an artificial intelligence system. " +
-                $"I am still learning. ";
+                             $"I am an artificial intelligence system. " +
+                             $"I am still learning. ";
             message += StaticMessage.AboutDemo;
             await context.PostAsync(message);
             context.Wait(this.MessageReceived);
@@ -116,7 +120,9 @@ namespace HRMBot.Dialogs
                         break;
 
                     default:
-                        message = string.Format(message, leave.AvailedAnnualLeave + leave.AvailedSickLeave + leave.AvailedCasualLeave, "total leaves");
+                        message = string.Format(message,
+                            leave.AvailedAnnualLeave + leave.AvailedSickLeave + leave.AvailedCasualLeave,
+                            "total leaves");
                         break;
                 }
 
@@ -167,7 +173,8 @@ namespace HRMBot.Dialogs
                         break;
 
                     default:
-                        message = string.Format(message, leave.TotalSickLeave + leave.TotalSickLeave + leave.TotalCasualLeave, "total leaves");
+                        message = string.Format(message,
+                            leave.TotalSickLeave + leave.TotalSickLeave + leave.TotalCasualLeave, "total leaves");
                         break;
                 }
 
@@ -176,6 +183,18 @@ namespace HRMBot.Dialogs
                 await context.PostAsync(message);
                 context.Wait(this.MessageReceived);
             }
+            catch (AuthenticationException)
+            {
+                await context.PostAsync(
+                    "You need to verify yourself before I can provide you this information. Please write verify to start the procecss");
+                context.Wait(MessageReceived);
+            }
+            catch (PlatformNotSupportedException)
+            {
+                await context.PostAsync("This chat platform is not yet supported. Please use Facebook or skype");
+                context.Wait(MessageReceived);
+            }
 
-    }    
+        }
+    }
 }
