@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace HRMBot.Extensions
 {
@@ -15,8 +17,15 @@ namespace HRMBot.Extensions
 
             if (result.TryFindEntity("LeaveType", out leaveEntityRecommendation))
             {
-                var msg = leaveEntityRecommendation.Resolution.FirstOrDefault().Value as Newtonsoft.Json.Linq.JArray;
-                return msg.First.ToString();
+                var all = leaveEntityRecommendation.Resolution.FirstOrDefault();
+                //var converter = Newtonsoft.Json.JsonConvert.SerializeObject(all);
+                var value = all.Value;
+                var valueJson = JsonConvert.SerializeObject(value);
+                var message = JsonConvert.DeserializeObject(valueJson) as JArray;
+                
+
+                //var msg = leaveEntityRecommendation.Resolution.FirstOrDefault().Value as Newtonsoft.Json.Linq.JArray;
+                return message.First.ToString();
             }
 
             return null;
