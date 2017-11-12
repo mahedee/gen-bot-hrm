@@ -17,6 +17,7 @@ namespace HRMBot.Repository
         public DbSet<Employee> Employees { get; set; }
         public DbSet<LeaveBalance> LeaveBalances { get; set; }
         public DbSet<UserInfo> UserInfos { get; set; }
+        public DbSet<TempOtp> TempOtps { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
