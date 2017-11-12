@@ -54,6 +54,10 @@
     <Compile Include="Migrations\201711111710215_Initial.Designer.cs">
       <DependentUpon>201711111710215_Initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711120656421_NewModelTempOtp.cs" />
+    <Compile Include="Migrations\201711120656421_NewModelTempOtp.Designer.cs">
+      <DependentUpon>201711120656421_NewModelTempOtp.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="PersonRepository.cs" />
@@ -73,6 +77,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201711111710215_Initial.resx">
       <DependentUpon>201711111710215_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711120656421_NewModelTempOtp.resx">
+      <DependentUpon>201711120656421_NewModelTempOtp.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
