@@ -29,20 +29,24 @@ namespace HRMBot.Repository
                 }
 
                 // if there is no userInfo link then create new UserInfo entry
-                var tempOtp = new TempOtp();
                 if (channelId.Equals("facebook") || channelId.Equals("skype"))
                 {
-                    tempOtp.ChannelId = channelId;
-                    tempOtp.Otp = otp;
-                    tempOtp.FromId = id;
-                    tempOtp.UserId = userInfo.Id;
+                    var tempOtp = new TempOtp
+                    {
+                        ChannelId = channelId,
+                        Otp = otp,
+                        FromId = id,
+                        UserId = userInfo.Id
+                    };
+
+                    db.TempOtps.Add(tempOtp);
+                    await db.SaveChangesAsync();
                 } 
                 else
                 {
                     throw new PlatformNotSupportedException("Chat medium not supported");
                 }
 
-                await db.SaveChangesAsync();
             }
             return otp;
         }
