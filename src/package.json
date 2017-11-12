@@ -1,0 +1,19 @@
+{
+  "name": "gen-bot-hrm",
+  "version": "0.0.1",
+  "description": "HRM bot for Leads Corporation LTD",
+  "main": "index.js",
+  "dependencies": {
+    "browser-sync": "^2.18.13",
+    "gulp": "^3.9.1",
+    "gulp-msbuild": "^0.5.2",
+    "gulp-plumber": "^1.1.0",
+    "gulp-serve-iis-express": "^1.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ratan Sunder Parai",
+  "license": "MIT"
+}

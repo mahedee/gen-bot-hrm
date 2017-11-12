@@ -19,17 +19,20 @@ namespace HRMBot
         {
             if (activity.Type == ActivityTypes.Message)
             {
-                // send typing indicator
                 ConnectorClient connector = new ConnectorClient(new Uri(activity.ServiceUrl));
-                Activity reply = activity.CreateReply();
-                reply.Type = ActivityTypes.Typing;
-                // reply.Text = null;
-                await connector.Conversations.ReplyToActivityAsync(reply);
 
-                var userData = activity.From.Name;
+                // If user send any images then do not replay antyhing. Just skip it.
+                if (activity.Attachments.Count == 0)
+                {
+                    // send typing indicator
+                    Activity typeing = activity.CreateReply();
+                    typeing.Type = ActivityTypes.Typing;
+                    await connector.Conversations.ReplyToActivityAsync(typeing);
 
-                await Conversation.SendAsync(activity, () => new Dialogs.RootLuisDialog(userData));
-                //await Conversation.SendAsync(activity, () => new Dialogs.RootLuisDialog());
+                    var userData = activity.From.Name;
+
+                    await Conversation.SendAsync(activity, () => new Dialogs.RootLuisDialog(userData));
+                }
             }
             else
             {

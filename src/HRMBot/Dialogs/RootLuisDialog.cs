@@ -7,10 +7,11 @@ using Microsoft.Bot.Builder.Luis.Models;
 using Microsoft.Bot.Builder.Dialogs;
 using System.Threading.Tasks;
 using Microsoft.Bot.Connector;
+using HRMBot.Extensions;
 
 namespace HRMBot.Dialogs
 {
-    [LuisModel("6f13a4ce-dabe-485a-bb3f-9aba3156ea95", "5ea418ae538a402a9b99a936389fd0e7", domain: "westus.api.cognitive.microsoft.com", staging: true)]
+    [LuisModel("6f13a4ce-dabe-485a-bb3f-9aba3156ea95", "5ea418ae538a402a9b99a936389fd0e7", domain: "westus.api.cognitive.microsoft.com")]
     [Serializable]
     public partial class RootLuisDialog : LuisDialog<object>
     {
@@ -25,16 +26,28 @@ namespace HRMBot.Dialogs
         public async Task AvailableLeave(IDialogContext context, LuisResult result)
         {
             //(result.Entities).Items[0]).Resolution).Items[0]).Value
-            string message = $"You are asking for AvailableLeave. Processing Entity: ";
+            string message = "You have {0} days of {1} available.";
 
-
-            if (result.TryFindEntity("LeaveType", out EntityRecommendation leaveEntityRecommendation))
+            switch(result.GetResolvedListEntity("LeaveType"))
             {
-                var msg = leaveEntityRecommendation.Resolution.FirstOrDefault().Value as Newtonsoft.Json.Linq.JArray;
-                message += msg.First.ToString();
+                case "SickLeave":
+                    message = String.Format(message, 13, "sick leaves");
+                    break;
 
+                case "AnnualLeave":
+                    message = String.Format(message, 37, "annual leaves");
+                    break;
 
+                case "CasualLeave":
+                    message = String.Format(message, 9, "casual leave");
+                    break;
+
+                default:
+                    message = String.Format(message, 59, "total leaves");
+                    break;
             }
+
+            // message += result.GetResolvedListEntity("LeaveType");
 
             await context.PostAsync(message);
             context.Wait(this.MessageReceived);
@@ -46,7 +59,10 @@ namespace HRMBot.Dialogs
         [LuisIntent("None")]
         public async Task None(IDialogContext context, LuisResult result)
         {
-            string message = $"I do not understand {result.Query}. I am learning new things everyday. Try again tomorrow? ";
+            string message = $"Sorry, I don’t have answer of this question. " +
+                $"I am an artificial intelligence system. " +
+                $"I am still learning. ";
+            message += StaticMessage.AboutDemo;
             await context.PostAsync(message);
             context.Wait(this.MessageReceived);
         }
@@ -54,18 +70,32 @@ namespace HRMBot.Dialogs
         [LuisIntent("AvailedLeave")]
         public async Task AvailedLeave(IDialogContext context, LuisResult result)
         {
-            string message = $"You are asking for AvailedLeave. Processing Entity: ";
-            EntityRecommendation leaveEntityRecommendation;
+            string message = "You have spent {0} days of {1} so far.";
 
-
-
-            if (result.TryFindEntity("LeaveType", out leaveEntityRecommendation))
+            switch(result.GetResolvedListEntity("SickLeave"))
             {
-                var msg = leaveEntityRecommendation.Resolution.FirstOrDefault().Value as Newtonsoft.Json.Linq.JArray;
-                message += msg.First.ToString();
+                case "SickLeave":
+                    message = String.Format(message, 8, "sick leaves");
+                    break;
 
+                case "AnnualLeave":
+                    message = String.Format(message, 15, "annual leaves");
+                    break;
 
+                case "CasualLeave":
+                    message = String.Format(message, 2, "casual leaves");
+                    break;
+
+                case "LeaveWithoutPay":
+                    message = String.Format(message, 1, "leave without pay");
+                    break;
+
+                default:
+                    message = String.Format(message, 26, "total leaves");
+                    break;
             }
+           
+
 
             await context.PostAsync(message);
             context.Wait(this.MessageReceived);
@@ -75,17 +105,25 @@ namespace HRMBot.Dialogs
         [LuisIntent("EntitledLeave")]
         public async Task EntitledLeave(IDialogContext context, LuisResult result)
         {
-            string message = $"You are asking for EntitledLeave. Processing Entity: ";
-            EntityRecommendation leaveEntityRecommendation;
+            string message = "You are entitled to have {0} days of {1} per year.";
 
-
-
-            if (result.TryFindEntity("LeaveType", out leaveEntityRecommendation))
+            switch (result.GetResolvedListEntity("SickLeave"))
             {
-                var msg = leaveEntityRecommendation.Resolution.FirstOrDefault().Value as Newtonsoft.Json.Linq.JArray;
-                message += msg.First.ToString();
+                case "SickLeave":
+                    message = String.Format(message, 14, "sick leaves");
+                    break;
 
+                case "AnnualLeave":
+                    message = String.Format(message, 20, "annual leaves");
+                    break;
 
+                case "CasualLeave":
+                    message = String.Format(message, 10, "casual leaves");
+                    break;
+
+                default:
+                    message = String.Format(message, 44, "total leaves");
+                    break;
             }
 
             await context.PostAsync(message);

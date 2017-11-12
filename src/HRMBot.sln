@@ -1,9 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.3
+VisualStudioVersion = 15.0.27004.2005
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HRMBot", "HRMBot\HRMBot.csproj", "{80B4DD7F-FD9C-4A2B-B8E7-4F4B08AE99DF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HRMBot.Repository", "HRMBot.Repository\HRMBot.Repository.csproj", "{E86D8F48-5FD5-4883-B0D5-B95E63F8023A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HRMBot.Models", "HRMBot.Models\HRMBot.Models.csproj", "{1538CF66-46B2-416F-BBAF-C7EDDE259EEE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HRMBot.Web", "HRMBot.Web\HRMBot.Web.csproj", "{78E7E768-E943-431E-872B-248D813CBC89}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +21,18 @@ Global
 		{80B4DD7F-FD9C-4A2B-B8E7-4F4B08AE99DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{80B4DD7F-FD9C-4A2B-B8E7-4F4B08AE99DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{80B4DD7F-FD9C-4A2B-B8E7-4F4B08AE99DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E86D8F48-5FD5-4883-B0D5-B95E63F8023A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E86D8F48-5FD5-4883-B0D5-B95E63F8023A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E86D8F48-5FD5-4883-B0D5-B95E63F8023A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E86D8F48-5FD5-4883-B0D5-B95E63F8023A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1538CF66-46B2-416F-BBAF-C7EDDE259EEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1538CF66-46B2-416F-BBAF-C7EDDE259EEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1538CF66-46B2-416F-BBAF-C7EDDE259EEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1538CF66-46B2-416F-BBAF-C7EDDE259EEE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78E7E768-E943-431E-872B-248D813CBC89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78E7E768-E943-431E-872B-248D813CBC89}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78E7E768-E943-431E-872B-248D813CBC89}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78E7E768-E943-431E-872B-248D813CBC89}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

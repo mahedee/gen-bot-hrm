@@ -21,7 +21,8 @@ namespace HRMBot.Dialogs
             {
                 "One joke incoming...",
                 "I hope this one will make you laugh...",
-                "Joke incoming"
+                "Joke incoming",
+                "Loading best joke specially for you..."
             };
 
             string preMessage = messagePoll.OrderBy(s => Guid.NewGuid()).First();

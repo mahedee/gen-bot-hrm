@@ -23,10 +23,7 @@ namespace HRMBot.Dialogs
                 "Hi " + userData
             };
 
-
-
-
-            string message = messagePoll.OrderBy(s => Guid.NewGuid()).First();
+            string message = messagePoll.OrderBy(s => Guid.NewGuid()).First() + ". I am HR Bot. How can I help you?";
             await context.PostAsync(message);
             context.Wait(this.MessageReceived);
         }
