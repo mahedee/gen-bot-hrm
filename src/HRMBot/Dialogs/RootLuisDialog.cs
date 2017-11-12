@@ -54,10 +54,12 @@ namespace HRMBot.Dialogs
                         break;
 
                     default:
-                        var totalAvailableLeave =
-                            (leave.TotalSickLeave + leave.TotalAnnualLeave + leave.TotalCasualLeave) -
-                            (leave.AvailedSickLeave + leave.AvailedAnnualLeave + leave.AvailedCasualLeave);
-                        message = string.Format(message, totalAvailableLeave, "total leaves");
+                        var custMessage = "You have " + (leave.TotalSickLeave - leave.AvailedSickLeave) + "days sick" +
+                                          ", " + (leave.TotalAnnualLeave - leave.AvailedAnnualLeave) +
+                                          " days annual and " +
+                                          (leave.TotalCasualLeave - leave.AvailedCasualLeave) +
+                                          " days casual leaves available";
+                        message = custMessage;
                         break;
                 }
 
@@ -120,9 +122,10 @@ namespace HRMBot.Dialogs
                         break;
 
                     default:
-                        message = string.Format(message,
-                            leave.AvailedAnnualLeave + leave.AvailedSickLeave + leave.AvailedCasualLeave,
-                            "total leaves");
+                        var custMessage = "You have used " + leave.AvailedSickLeave + " days of sick, " +
+                                          leave.AvailedCasualLeave + " days of casual and " + leave.AvailedAnnualLeave +
+                                          " days of annual leave so far";
+                        message = custMessage;
                         break;
                 }
 
@@ -173,8 +176,9 @@ namespace HRMBot.Dialogs
                         break;
 
                     default:
-                        message = string.Format(message,
-                            leave.TotalSickLeave + leave.TotalSickLeave + leave.TotalCasualLeave, "total leaves");
+                        message = "You are entitled to have " + leave.TotalSickLeave + " days of sick, " +
+                                  leave.TotalCasualLeave + " days of casual, and " +
+                                  leave.TotalAnnualLeave + " days of annual leave per year";
                         break;
                 }
 
