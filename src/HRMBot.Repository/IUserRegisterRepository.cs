@@ -8,7 +8,7 @@ namespace HRMBot.Repository
 {
     public interface IUserRegisterRepository
     {
-        Task<int> GenerateOtpCodeAsync(string channelId, string id, string mobileNumber, string name);
+        Task<string> GenerateOtpCodeAsync(string channelId, string id, string mobileNumber, string name);
         Task<bool> VarifyOtpAsync(string channelId, string id, string otp);
         Task<string> IsAlreadyVerifiedAsync(string channelId, string id);
     }

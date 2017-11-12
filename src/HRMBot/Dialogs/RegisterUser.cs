@@ -3,6 +3,7 @@ using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Builder.Luis.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Core;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -41,13 +42,12 @@ namespace HRMBot.Dialogs
             try
             {
                 var mobileNumber = await result;
-                // await context.PostAsync($"Your mobile number is {mobileNumber}");
 
                 // generate otp and sent it to mobile
                 var repo = new UserRegisterRepository();
-                var otp = await repo.GenerateOtpCodeAsync(context.Activity.ChannelId, context.Activity.From.Id, mobileNumber.ToString("D11"), context.Activity.From.Name);
+                var otp = await repo.GenerateOtpCodeAsync(context.Activity.ChannelId, context.Activity.From.Id,
+                    mobileNumber.ToString("D11"), context.Activity.From.Name);
                 // send varification message
-                // await context.PostAsync($"Your generated otp code is {otp}");
                 string message = $"Your verification code for the HRMBot is {otp}";
                 IMessageProvider provider = new Sms();
                 var success = await provider.SendAsync(mobileNumber.ToString("D11"), message);
@@ -71,6 +71,16 @@ namespace HRMBot.Dialogs
             catch (OperationCanceledException)
             {
                 await context.PostAsync("You have canceled the mobile verification process");
+                context.Wait(MessageReceived);
+            }
+            catch (ObjectNotFoundException)
+            {
+                await context.PostAsync("Your mobile number is not in the database. Please contact admin");
+                context.Wait(MessageReceived);
+            }
+            catch (PlatformNotSupportedException)
+            {
+                await context.PostAsync("Sorry, This chat channel is not supported for varification yet.");
                 context.Wait(MessageReceived);
             }
             catch (Exception e)

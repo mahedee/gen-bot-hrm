@@ -11,12 +11,12 @@ namespace HRMBot.Repository
     public class UserRegisterRepository : IUserRegisterRepository
     {
 
-        public async Task<int> GenerateOtpCodeAsync(string channelId, string id, string mobileNumber, string name)
+        public async Task<string> GenerateOtpCodeAsync(string channelId, string id, string mobileNumber, string name)
         {
 
 
             var generator = new Random();
-            var otp = generator.Next(100000, 1000000);
+            var otp = generator.Next(100000, 1000000).ToString();
 
             // store the otp with user id
             using (var db = new ApplicationDbContext())
@@ -29,15 +29,12 @@ namespace HRMBot.Repository
                 }
 
                 // if there is no userInfo link then create new UserInfo entry
-                if (channelId.Equals("facebook"))
+                var tempOtp = new TempOtp();
+                if (channelId.Equals("facebook") || channelId.Equals("skype"))
                 {
-                    userInfo.FacebookId = id;
-                    userInfo.FacebookOTP = otp;
-                } else if (channelId.Equals("skype"))
-                {
-                    userInfo.SkypeId = id;
-                    userInfo.SkypeOTP = otp;
-                }
+                    tempOtp.ChannelId = channelId;
+                    tempOtp.Otp = otp;
+                } 
                 else
                 {
                     throw new PlatformNotSupportedException("Chat medium not supported");
