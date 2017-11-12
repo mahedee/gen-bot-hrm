@@ -1,5 +1,9 @@
 ﻿using System;
+using System.Data.Entity;
+using System.Data.Entity.Core;
+using System.Linq;
 using System.Threading.Tasks;
+using HRMBot.Models;
 using HRMBot.Repository.Models;
 
 namespace HRMBot.Repository
@@ -7,10 +11,9 @@ namespace HRMBot.Repository
     public class UserRegisterRepository : IUserRegisterRepository
     {
 
-        public async Task<string> GenerateOtpCodeAsync(string id, string mobileNumber, string name)
+        public async Task<string> GenerateOtpCodeAsync(string channelId, string id, string mobileNumber, string name)
         {
 
-            //TODO: check if the mobile number is already in the database if it isn't in the databasse throw execption
 
             var generator = new Random();
             var otp = generator.Next(100000, 1000000).ToString();
@@ -18,23 +21,25 @@ namespace HRMBot.Repository
             // store the otp with user id
             using (var db = new ApplicationDbContext())
             {
-                var user = await db.Users.FindAsync(id);
-                if (user == null)
-                {
-                    user = new User
-                    {
-                        UserId = id,
-                        OneTimePassword = otp,
-                        TemporaryMobileNumber = mobileNumber,
-                        Name = name
-                    };
 
-                    db.Users.Add(user);
+                var userInfo = await db.UserInfos.FirstOrDefaultAsync(p => p.MobileNo.Equals(mobileNumber));
+                if (userInfo == null)
+                {
+                    throw new ObjectNotFoundException("Mobile number is not in database");
                 }
+
+                // if there is no userInfo link then create new UserInfo entry
+                var tempOtp = new TempOtp();
+                if (channelId.Equals("facebook") || channelId.Equals("skype"))
+                {
+                    tempOtp.ChannelId = channelId;
+                    tempOtp.Otp = otp;
+                    tempOtp.FromId = id;
+                    tempOtp.UserId = userInfo.Id;
+                } 
                 else
                 {
-                    user.OneTimePassword = otp;
-                    user.TemporaryMobileNumber = mobileNumber;
+                    throw new PlatformNotSupportedException("Chat medium not supported");
                 }
 
                 await db.SaveChangesAsync();
@@ -42,30 +47,48 @@ namespace HRMBot.Repository
             return otp;
         }
 
-        public async Task<bool> VarifyOtpAsync(string id, string otp)
+        public async Task<bool> VarifyOtpAsync(string channelId, string id, string otp)
         {
-            var success = false;
             using (var db = new ApplicationDbContext())
             {
-                var user = await db.Users.FindAsync(id);
-                // check if otp matches
-                if (user?.OneTimePassword != null && user.OneTimePassword.Equals(otp.Trim()))
+                var tempOtp = await db.TempOtps.Where(p => p.FromId.Equals(id) && p.ChannelId.Equals(channelId) && p.Otp.Equals(otp))
+                    .FirstOrDefaultAsync();
+                if (tempOtp == null) return false;
+                var userInfo = await db.UserInfos.Where(p => p.Id == tempOtp.UserId).FirstOrDefaultAsync();
+                if (channelId.Equals("facebook"))
                 {
-                    user.MobileNumber = user.TemporaryMobileNumber;
-                    await db.SaveChangesAsync();
-                    success = true;
+                    userInfo.FacebookId = id;
+                } else if (channelId.Equals("skype"))
+                {
+                    userInfo.SkypeId = id;
                 }
+                // remove entry from TempOtp table
+                db.TempOtps.Remove(tempOtp);
+                await db.SaveChangesAsync();
+                
+                return true;
             }
 
-            return success;
         }
 
-        public async Task<string> isAlreadyVerifiedAsync(string id)
+        public async Task<string> IsAlreadyVerifiedAsync(string channelId, string id)
         {
             using (var db = new ApplicationDbContext())
             {
-                var user = await db.Users.FindAsync(id);
-                return user?.MobileNumber;
+                UserInfo user;
+                if (channelId.Equals("facebook"))
+                {
+                    user = await db.UserInfos.FirstOrDefaultAsync(p => p.FacebookId.Equals(id));
+                } else if (channelId.Equals("skype"))
+                {
+                    user = await db.UserInfos.FirstOrDefaultAsync(p => p.SkypeId.Equals(id));
+                }
+                else
+                {
+                    throw new PlatformNotSupportedException("Chat medium not supported");
+                }
+                // var user = await db.Users.FindAsync(id);
+                return user?.MobileNo;
             }
         }
     }

@@ -7,13 +7,13 @@ namespace HRMBot.Repository.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class designationandseeddata : IMigrationMetadata
+    public sealed partial class Initial : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(designationandseeddata));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Initial));
         
         string IMigrationMetadata.Id
         {
-            get { return "201711110911170_designation-and-seed-data"; }
+            get { return "201711111710215_Initial"; }
         }
         
         string IMigrationMetadata.Source

@@ -50,37 +50,13 @@
   <ItemGroup>
     <Compile Include="ApplicationDbContext.cs" />
     <Compile Include="IUserRegisterRepository.cs" />
-    <Compile Include="Migrations\201711041219471_InitialCreate.cs" />
-    <Compile Include="Migrations\201711041219471_InitialCreate.Designer.cs">
-      <DependentUpon>201711041219471_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201711111710215_Initial.cs" />
+    <Compile Include="Migrations\201711111710215_Initial.Designer.cs">
+      <DependentUpon>201711111710215_Initial.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201711110808471_new-schemas.cs" />
-    <Compile Include="Migrations\201711110808471_new-schemas.Designer.cs">
-      <DependentUpon>201711110808471_new-schemas.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711110831287_fix-relationship.cs" />
-    <Compile Include="Migrations\201711110831287_fix-relationship.Designer.cs">
-      <DependentUpon>201711110831287_fix-relationship.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711110911170_designation-and-seed-data.cs" />
-    <Compile Include="Migrations\201711110911170_designation-and-seed-data.Designer.cs">
-      <DependentUpon>201711110911170_designation-and-seed-data.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711111335011_leave-model-update.cs" />
-    <Compile Include="Migrations\201711111335011_leave-model-update.Designer.cs">
-      <DependentUpon>201711111335011_leave-model-update.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711111407024_provablefix.cs" />
-    <Compile Include="Migrations\201711111407024_provablefix.Designer.cs">
-      <DependentUpon>201711111407024_provablefix.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711111509461_modify-models.cs" />
-    <Compile Include="Migrations\201711111509461_modify-models.Designer.cs">
-      <DependentUpon>201711111509461_modify-models.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711111553112_madeUserInfoOptional.cs" />
-    <Compile Include="Migrations\201711111553112_madeUserInfoOptional.Designer.cs">
-      <DependentUpon>201711111553112_madeUserInfoOptional.cs</DependentUpon>
+    <Compile Include="Migrations\201711120656421_NewModelTempOtp.cs" />
+    <Compile Include="Migrations\201711120656421_NewModelTempOtp.Designer.cs">
+      <DependentUpon>201711120656421_NewModelTempOtp.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\User.cs" />
@@ -99,29 +75,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201711041219471_InitialCreate.resx">
-      <DependentUpon>201711041219471_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201711111710215_Initial.resx">
+      <DependentUpon>201711111710215_Initial.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711110808471_new-schemas.resx">
-      <DependentUpon>201711110808471_new-schemas.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711110831287_fix-relationship.resx">
-      <DependentUpon>201711110831287_fix-relationship.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711110911170_designation-and-seed-data.resx">
-      <DependentUpon>201711110911170_designation-and-seed-data.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711111335011_leave-model-update.resx">
-      <DependentUpon>201711111335011_leave-model-update.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711111407024_provablefix.resx">
-      <DependentUpon>201711111407024_provablefix.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711111509461_modify-models.resx">
-      <DependentUpon>201711111509461_modify-models.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711111553112_madeUserInfoOptional.resx">
-      <DependentUpon>201711111553112_madeUserInfoOptional.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201711120656421_NewModelTempOtp.resx">
+      <DependentUpon>201711120656421_NewModelTempOtp.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -7,13 +7,13 @@ namespace HRMBot.Repository.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class provablefix : IMigrationMetadata
+    public sealed partial class NewModelTempOtp : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(provablefix));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(NewModelTempOtp));
         
         string IMigrationMetadata.Id
         {
-            get { return "201711111407024_provablefix"; }
+            get { return "201711120656421_NewModelTempOtp"; }
         }
         
         string IMigrationMetadata.Source
