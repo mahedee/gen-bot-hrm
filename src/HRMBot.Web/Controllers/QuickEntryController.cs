@@ -1,23 +1,39 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using HRMBot.Models;
+using HRMBot.Repository;
 
 namespace HRMBot.Web.Controllers
 {
     public class QuickEntryController : Controller
     {
+        private ApplicationDbContext db = new ApplicationDbContext();
+
         // GET: QuickEntry
         public ActionResult Index()
         {
-            return View();
+            return View(db.UserInfos.ToList());
         }
 
         // GET: QuickEntry/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            UserInfo userInfo = db.UserInfos.Find(id);
+            if (userInfo == null)
+            {
+                return HttpNotFound();
+            }
+            return View(userInfo);
         }
 
         // GET: QuickEntry/Create
@@ -27,63 +43,103 @@ namespace HRMBot.Web.Controllers
         }
 
         // POST: QuickEntry/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(QuickEntryVM quickEntryVM)
         {
-            try
+            if (ModelState.IsValid)
             {
-                // TODO: Add insert logic here
+                UserInfo userInfo = new UserInfo();
+                userInfo.MobileNo = quickEntryVM.MobileNo;
 
+                Employee employee = new Employee();
+                employee.FullName = quickEntryVM.EmployeeName;
+                employee.UserInfo = userInfo;
+
+                LeaveBalance leaveBalance = new LeaveBalance();
+                leaveBalance.TotalAnnualLeave = 20;
+                leaveBalance.TotalCasualLeave = 10;
+                leaveBalance.TotalSickLeave = 13;
+                leaveBalance.AvailedAnnualLeave = 0;
+                leaveBalance.AvailedCasualLeave = 0;
+                leaveBalance.AvailedSickLeave = 0;
+                leaveBalance.Employee = employee;
+
+                //db.UserInfos.Add(userInfo);
+                db.LeaveBalances.Add(leaveBalance);
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            catch
-            {
-                return View();
-            }
+
+            return View(quickEntryVM);
         }
 
         // GET: QuickEntry/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            UserInfo userInfo = db.UserInfos.Find(id);
+            if (userInfo == null)
+            {
+                return HttpNotFound();
+            }
+            return View(userInfo);
         }
 
         // POST: QuickEntry/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "Id,MobileNo,FacebookId,FacebookOTP,SkypeId,SkypeOTP,SlackId,SlackOTP,WebOTP")] UserInfo userInfo)
         {
-            try
+            if (ModelState.IsValid)
             {
-                // TODO: Add update logic here
-
+                db.Entry(userInfo).State = EntityState.Modified;
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            catch
-            {
-                return View();
-            }
+            return View(userInfo);
         }
 
         // GET: QuickEntry/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            UserInfo userInfo = db.UserInfos.Find(id);
+            if (userInfo == null)
+            {
+                return HttpNotFound();
+            }
+            return View(userInfo);
         }
 
         // POST: QuickEntry/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
         {
-            try
-            {
-                // TODO: Add delete logic here
+            UserInfo userInfo = db.UserInfos.Find(id);
+            db.UserInfos.Remove(userInfo);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
 
-                return RedirectToAction("Index");
-            }
-            catch
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
             {
-                return View();
+                db.Dispose();
             }
+            base.Dispose(disposing);
         }
     }
 }
