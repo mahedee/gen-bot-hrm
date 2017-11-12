@@ -39,8 +39,8 @@ namespace HRMBot.Dialogs
                 switch (result.GetResolvedListEntity("LeaveType"))
                 {
                     case "SickLeave":
-                        message = string.Format(message, (leave.TotalSickLeave - leave.AvailedSickLeave),
-                            "sick leaves");
+                        var availableSickLeave = leave.TotalSickLeave - leave.AvailedSickLeave;
+                        message = "You have " + availableSickLeave + " days of sick leaves available ";
                         break;
 
                     case "AnnualLeave":
@@ -161,11 +161,11 @@ namespace HRMBot.Dialogs
                 switch (result.GetResolvedListEntity("LeaveType"))
                 {
                     case "SickLeave":
-                        message = string.Format(message, leave.TotalSickLeave, "sick leaves");
+                        message = String.Format(message, leave.TotalSickLeave, "sick leaves");
                         break;
 
                     case "AnnualLeave":
-                        message = string.Format(message, leave.TotalAnnualLeave, "annual leaves");
+                        message = String.Format(message, leave.TotalAnnualLeave, "annual leaves");
                         break;
 
                     case "CasualLeave":
