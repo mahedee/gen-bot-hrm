@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="ApplicationDbContext.cs" />
     <Compile Include="IUserRegisterRepository.cs" />
+    <Compile Include="LeaveRepository.cs" />
     <Compile Include="Migrations\201711111710215_Initial.cs" />
     <Compile Include="Migrations\201711111710215_Initial.Designer.cs">
       <DependentUpon>201711111710215_Initial.cs</DependentUpon>

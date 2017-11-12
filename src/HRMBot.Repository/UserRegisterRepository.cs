@@ -4,7 +4,6 @@ using System.Data.Entity.Core;
 using System.Linq;
 using System.Threading.Tasks;
 using HRMBot.Models;
-using HRMBot.Repository.Models;
 
 namespace HRMBot.Repository
 {
